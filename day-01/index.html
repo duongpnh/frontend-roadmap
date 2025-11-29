@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Learn why semantic HTML matters with a clean, accessible blog article layout.">
+	<meta property="og:title" content="Foundations Blog — Semantic HTML">
+	<meta property="og:description" content="A concise example showing semantic structure, accessibility, and meaningful markup.">
+	<meta property="og:type" content="article">
+	<title>Foundations Blog — Semantic HTML</title>
+	<link rel="icon" href="data:,">
+</head>
+<body>
+	<a href="#main" class="skip-link">Skip to content</a>
+	<header>
+		<div class="branding">
+			<h1>Foundations Blog</h1>
+			<p>Learning semantic HTML the right way</p>
+		</div>
+		<nav aria-label="Primary">
+			<ul>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">Articles</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<main id="main">
+		<article>
+			<header>
+				<h2>Why Semantic HTML Matters</h2>
+				<p><time datetime="2025-11-29">Nov 29, 2025</time> • 5 min read</p>
+			</header>
+			<figure>
+				<img src="https://picsum.photos/960/320" alt="An abstract pattern symbolizing structured content">
+				<figcaption>Structure communicates meaning to users and machines.</figcaption>
+			</figure>
+			<p>Semantic elements express the purpose of content. They help assistive technologies, search engines, and developers understand the structure of a page without relying on class names alone.</p>
+			<section aria-labelledby="benefits">
+				<h3 id="benefits">Key benefits</h3>
+				<ul>
+					<li>Improved accessibility</li>
+					<li>Better SEO and link previews</li>
+					<li>Cleaner, more maintainable code</li>
+				</ul>
+			</section>
+			<footer>
+				<p>Filed under <a href="#">HTML</a> • <a href="#">Accessibility</a></p>
+			</footer>
+		</article>
+
+		<aside aria-labelledby="about-author">
+			<h2 id="about-author">About the author</h2>
+			<p>Student on a 2‑week journey through HTML, CSS, Git, and Deployment.</p>
+		</aside>
+	</main>
+
+	<footer>
+		<p>&copy; 2025 Foundations Blog</p>
+	</footer>
+</body>
+</html>
+

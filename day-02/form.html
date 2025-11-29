@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Accessible signup and contact forms using labels, fieldsets, and native validation.">
+	<meta property="og:title" content="Day 2 — Forms Basics">
+	<meta property="og:description" content="Hands-on HTML forms with accessibility and validation best practices.">
+	<title>Day 2 — Forms Basics</title>
+	<link rel="icon" href="data:,">
+</head>
+<body>
+	<header>
+		<h1>Forms Basics</h1>
+		<p>Signup and Contact forms with accessible labels and native validation.</p>
+	</header>
+
+	<main>
+		<section aria-labelledby="signup">
+			<h2 id="signup">Signup</h2>
+			<form action="#" method="post" novalidate aria-describedby="signup-help">
+				<p id="signup-help">All fields marked * are required.</p>
+
+				<div>
+					<label for="su-name">Full name *</label>
+					<input id="su-name" name="name" type="text" required autocomplete="name">
+				</div>
+
+				<div>
+					<label for="su-email">Email *</label>
+					<input id="su-email" name="email" type="email" required autocomplete="email" inputmode="email">
+				</div>
+
+				<div>
+					<label for="su-password">Password *</label>
+					<input id="su-password" name="password" type="password" required minlength="8" aria-describedby="pw-hint">
+					<small id="pw-hint">Use at least 8 characters with letters and numbers.</small>
+				</div>
+
+				<div>
+					<label for="su-age">Age</label>
+					<input id="su-age" name="age" type="number" min="13" max="120" inputmode="numeric">
+				</div>
+
+				<div>
+					<label for="su-website">Website</label>
+					<input id="su-website" name="website" type="url" placeholder="https://example.com" inputmode="url">
+				</div>
+
+				<button type="submit">Create account</button>
+			</form>
+		</section>
+
+		<hr>
+
+		<section aria-labelledby="contact">
+			<h2 id="contact">Contact</h2>
+			<form action="#" method="post">
+				<fieldset>
+					<legend>Your details</legend>
+					<div>
+						<label for="ct-name">Name *</label>
+						<input id="ct-name" name="name" type="text" required>
+					</div>
+					<div>
+						<label for="ct-email">Email *</label>
+						<input id="ct-email" name="email" type="email" required>
+					</div>
+				</fieldset>
+
+				<fieldset>
+					<legend>Message</legend>
+					<div>
+						<label for="ct-topic">Topic</label>
+						<select id="ct-topic" name="topic">
+							<option value="general">General</option>
+							<option value="support">Support</option>
+							<option value="feedback">Feedback</option>
+						</select>
+					</div>
+					<div>
+						<label for="ct-message">Message *</label>
+						<textarea id="ct-message" name="message" rows="5" required></textarea>
+					</div>
+				</fieldset>
+
+				<div>
+					<label>
+						<input type="checkbox" name="agree" required>
+						I agree to the terms *
+					</label>
+				</div>
+
+				<button type="submit">Send</button>
+			</form>
+		</section>
+	</main>
+</body>
+</html>
+

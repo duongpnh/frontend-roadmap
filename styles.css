@@ -1,0 +1,28 @@
+:root{
+	--bg:#0b1020;
+	--surface:#0f172a;
+	--text:#e5e7eb;
+	--muted:#9ca3af;
+	--brand:#22c55e;
+	--radius:12px
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial}
+.container{max-width:72rem;margin:0 auto;padding:1rem}
+.site-header{background:var(--surface);border-bottom:1px solid rgba(255,255,255,.06)}
+.site-title{margin:0 0 .25rem;font-size:clamp(1.5rem,2.5vw + 1rem,2.25rem)}
+.site-subtitle{margin:.25rem 0 1rem;color:var(--muted)}
+.site-nav{display:flex;gap:.75rem;flex-wrap:wrap}
+.nav-link{color:var(--muted);text-decoration:none}
+.nav-link:hover,.nav-link:focus{color:var(--text);text-decoration:underline;text-underline-offset:2px}
+.section{margin:2rem 0}
+.checklist{padding-left:1.25rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.card{display:block;background:var(--surface);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:1rem;color:var(--text);text-decoration:none}
+.card h3{margin:.25rem 0 .5rem;font-size:clamp(1.05rem,1vw + .95rem,1.25rem)}
+.card p{margin:0 0 .5rem;color:var(--muted)}
+.card small{color:var(--muted)}
+.card:hover{outline:2px solid rgba(34,197,94,.35)}
+.links{padding-left:1.25rem}
+.site-footer{margin:2rem 0 0;border-top:1px solid rgba(255,255,255,.06);background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0))}
+

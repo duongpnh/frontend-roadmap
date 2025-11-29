@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Accessible pricing comparison table using caption, thead/tbody/tfoot, and scoped headers.">
+	<meta property="og:title" content="Day 3 — Accessible Tables">
+	<meta property="og:description" content="Build an accessible HTML table with proper structure and semantics.">
+	<title>Day 3 — Accessible Tables</title>
+	<link rel="icon" href="data:,">
+</head>
+<body>
+	<header>
+		<h1>Pricing Comparison</h1>
+		<p>Accessible table using caption, thead/tbody/tfoot, and header scope.</p>
+	</header>
+
+	<main>
+		<table>
+			<caption>Plans and features (prices in USD per month)</caption>
+			<thead>
+				<tr>
+					<th scope="col">Plan</th>
+					<th scope="col">Price</th>
+					<th scope="col">Storage</th>
+					<th scope="col">Support</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">Starter</th>
+					<td>$9</td>
+					<td>10 GB</td>
+					<td>Email</td>
+				</tr>
+				<tr>
+					<th scope="row">Pro</th>
+					<td>$19</td>
+					<td>100 GB</td>
+					<td>Email + Chat</td>
+				</tr>
+				<tr>
+					<th scope="row">Business</th>
+					<td>$49</td>
+					<td>1 TB</td>
+					<td>24/7 Phone + Priority</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="4">All plans include free updates.</td>
+				</tr>
+			</tfoot>
+		</table>
+	</main>
+</body>
+</html>
+

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Day 5 — CSS Selectors & Cascade</title>
+	<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+	<header class="site-header">
+		<h1 class="site-title">Selectors in Action</h1>
+		<nav class="primary-nav" aria-label="Primary">
+			<ul class="nav-list">
+				<li><a class="nav-link" href="#">Home</a></li>
+				<li><a class="nav-link is-active" href="#">Articles</a></li>
+				<li><a class="nav-link" href="#">About</a></li>
+				<li><a class="nav-link" href="#">Contact</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<main class="container">
+		<article class="post" data-topic="html">
+			<h2 class="post-title">Styling Without IDs</h2>
+			<p class="post-meta"><time datetime="2025-11-29">Nov 29, 2025</time> • CSS selectors, specificity</p>
+			<p class="lead">Use element, class, attribute, and pseudo-class selectors to target UI affordances cleanly.</p>
+			<p>Visit our <a href="#" title="Read the accessibility guide">accessibility guide</a> and <a href="#" title="Check the style guide">style guide</a> for details.</p>
+			<a class="button" href="#" data-variant="primary">Read more</a>
+			<a class="button" href="#" data-variant="secondary" disabled aria-disabled="true">Disabled</a>
+		</article>
+
+		<section class="signup">
+			<h3>Newsletter</h3>
+			<form action="#" method="post">
+				<label>Email
+					<input type="email" name="email" placeholder="you@example.com" required>
+				</label>
+				<label>
+					<input type="checkbox" name="agree"> I agree to receive emails
+				</label>
+				<button class="button" type="submit" data-variant="primary">Subscribe</button>
+			</form>
+		</section>
+	</main>
+</body>
+</html>
+
+

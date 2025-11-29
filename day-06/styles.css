@@ -1,0 +1,97 @@
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial;
+	background: #0b1020;
+	color: #e5e7eb;
+}
+
+:root {
+	--surface: #0f172a;
+	--panel: #111827;
+	--muted: #9ca3af;
+	--brand: #22c55e;
+	--radius: 12px;
+	--pad: clamp(0.75rem, 1.2vw + 0.5rem, 1.25rem);
+}
+
+.page-header h1 { font-size: clamp(1.5rem, 2.5vw + 1rem, 2.25rem); }
+h2 { font-size: clamp(1.25rem, 1.5vw + 1rem, 1.75rem); }
+
+.u-pad { padding: var(--pad); }
+.u-mt { margin-top: 2rem; }
+
+.page-header {
+	background: linear-gradient(90deg, rgba(255,255,255,.02), rgba(255,255,255,.00));
+	border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+/* Card component */
+.card-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1rem;
+}
+
+.card {
+	background: var(--panel);
+	border: 1px solid rgba(255,255,255,.06);
+	border-radius: var(--radius);
+	overflow: hidden;
+	box-shadow: 0 8px 24px rgba(0,0,0,.25);
+}
+
+.card-media {
+	display: block;
+	inline-size: 100%;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+}
+
+.card-body {
+	padding: var(--pad);
+}
+
+.card-title { margin: 0 0 .25rem; }
+.card p { color: var(--muted); margin: 0 0 .75rem; }
+.card-button {
+	display: inline-block;
+	padding: .6rem 1rem;
+	background: var(--brand);
+	color: #06210f;
+	border-radius: 8px;
+	text-decoration: none;
+	font-weight: 700;
+}
+
+/* Two-column with inline-block (historical approach) */
+.two-col {
+	font-size: 0; /* remove inline-block white space */
+	background: var(--surface);
+	border: 1px solid rgba(255,255,255,.06);
+	border-radius: var(--radius);
+	overflow: hidden;
+}
+.two-col .col {
+	display: inline-block;
+	vertical-align: top;
+	font-size: 1rem; /* restore */
+	width: 50%;
+	padding: var(--pad);
+}
+.two-col h3 { margin-top: 0; }
+
+/* Breakpoints */
+@media (max-width: 900px) {
+	.card-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+	.card-grid { grid-template-columns: 1fr; }
+	.two-col .col { width: 100%; display: block; }
+}
+
+

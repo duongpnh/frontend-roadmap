@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Day 7 — Flexbox</title>
+	<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+	<header class="navbar">
+		<a class="brand" href="#">FlexSite</a>
+		<nav class="nav" aria-label="Primary">
+			<a class="nav-link is-active" href="#">Home</a>
+			<a class="nav-link" href="#">Features</a>
+			<a class="nav-link" href="#">Pricing</a>
+			<a class="nav-link" href="#">Contact</a>
+		</nav>
+		<button class="cta">Sign up</button>
+	</header>
+
+	<main class="container">
+		<section aria-labelledby="features">
+			<h2 id="features">Features</h2>
+			<div class="card-row">
+				<article class="card">
+					<h3>Fast</h3>
+					<p>Flex layouts are simple and efficient for 1‑D alignment.</p>
+				</article>
+				<article class="card">
+					<h3>Responsive</h3>
+					<p>Rows wrap gracefully using <code>flex-wrap</code>.</p>
+				</article>
+				<article class="card">
+					<h3>Centered</h3>
+					<p>Center anything on both axes with a few properties.</p>
+				</article>
+			</div>
+		</section>
+
+		<section aria-labelledby="loaderDemo">
+			<h2 id="loaderDemo">Centered Loader</h2>
+			<div class="loader-wrap">
+				<div class="spinner" role="status" aria-label="Loading"></div>
+			</div>
+		</section>
+	</main>
+</body>
+</html>
+

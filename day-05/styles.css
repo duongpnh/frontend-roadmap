@@ -1,0 +1,81 @@
+/* Base */
+:root {
+	--bg: #0f172a;
+	--surface: #111827;
+	--text: #e5e7eb;
+	--muted: #9ca3af;
+	--brand: #22c55e;
+	--brand-2: #10b981;
+	--danger: #ef4444;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body {
+	margin: 0;
+	padding: 0;
+	background: var(--bg);
+	color: var(--text);
+	font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+
+.container {
+	max-width: 72rem;
+	margin: 0 auto;
+	padding: 2rem 1rem;
+}
+
+/* Element selectors */
+h1, h2, h3 { line-height: 1.2; margin: 0 0 0.5em; }
+p { color: var(--text); }
+small { color: var(--muted); }
+
+/* Class selectors */
+.site-header {
+	padding: 1rem;
+	background: linear-gradient(90deg, #0b1020, #0d1224);
+	border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.site-title { margin: 0 0 0.25rem; }
+.nav-list { display: flex; gap: 1rem; list-style: none; padding: 0; margin: 0; }
+.nav-link { color: var(--muted); text-decoration: none; }
+.nav-link.is-active,
+.nav-link:hover,
+.nav-link:focus { color: var(--text); text-decoration: underline; text-underline-offset: 2px; }
+
+.post { padding: 1rem; background: var(--surface); border: 1px solid rgba(255,255,255,.06); border-radius: 8px; }
+.post-meta { color: var(--muted); }
+.lead { font-weight: 500; }
+
+/* Attribute selectors */
+.button[data-variant="primary"] { background: var(--brand); }
+.button[data-variant="secondary"] { background: transparent; color: var(--text); border: 1px solid var(--text); }
+.post[data-topic="html"] .post-title::before { content: "HTML · "; color: var(--brand-2); }
+
+/* Pseudo-classes and states */
+.button {
+	display: inline-block;
+	padding: 0.6rem 1rem;
+	border-radius: 6px;
+	color: #06210f;
+	text-decoration: none;
+	font-weight: 600;
+	border: none;
+	transition: transform .06s ease, background .2s ease, color .2s ease;
+}
+.button:hover { transform: translateY(-1px); }
+.button:active { transform: translateY(0); }
+.button[disabled],
+.button[aria-disabled="true"] { opacity: .5; pointer-events: none; }
+
+/* Specificity demo: avoid IDs; use utility class to override safely */
+.text-danger { color: var(--danger) !important; }
+
+/* Forms */
+input[type="email"]::placeholder { color: #94a3b8; }
+input:required { outline-color: var(--brand); }
+input:invalid { outline-color: var(--danger); }
+
+
