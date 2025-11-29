@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Phase 2 — Day 12: Todo Build</title>
+	<link rel="stylesheet" href="../../styles.css">
+	<script type="module" src="./main.js"></script>
+</head>
+<body>
+	<main class="container">
+		<h1>Day 12 — Todo Build (Add/Toggle/Delete)</h1>
+		<form id="todo-form" aria-describedby="hint">
+			<label>New todo
+				<input id="todo-input" type="text" required placeholder="What needs to be done?">
+			</label>
+			<button type="submit">Add</button>
+		</form>
+		<p id="hint">Tip: Use keyboard to navigate items and buttons.</p>
+		<ul id="todo-list" aria-live="polite" aria-relevant="additions removals"></ul>
+		<p><a class="nav-link" href="../index.html">Back to Phase 2</a></p>
+	</main>
+</body>
+</html>
+
