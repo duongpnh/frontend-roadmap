@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiến Trúc và Thành Phần của Trang Web</title>
+  <!-- Tải Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Cấu hình Tailwind cho font Inter -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f4f7f9;
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'primary': '#4f46e5',
+            'secondary': '#10b981',
+          },
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="min-h-screen antialiased text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-primary shadow-lg sticky top-0 z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <h1 class="text-3xl font-extrabold text-white text-center">
+        Cấu Trúc Của Một Trang Web Hiện Đại
+      </h1>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- Giới Thiệu -->
+    <section class="bg-white p-8 rounded-xl shadow-2xl mb-12">
+      <h2 class="text-2xl font-bold text-primary mb-4 border-b-2 border-primary pb-2">1. Giới Thiệu Chung</h2>
+      <p class="text-lg leading-relaxed text-gray-600">
+        Mọi trang web bạn truy cập, từ những blog đơn giản đến các ứng dụng thương mại điện tử phức tạp, đều được xây
+        dựng dựa trên một kiến trúc chung. Về cơ bản, một trang web là một bộ sưu tập các tài liệu và tài nguyên (hình
+        ảnh, video, mã lập trình) được lưu trữ trên một máy tính (Server) và được hiển thị trên máy tính của bạn
+        (Client/Browser).
+      </p>
+    </section>
+
+    <!-- Kiến Trúc Tổng Thể: Client - Server -->
+    <section class="mb-12">
+      <div class="bg-white p-8 rounded-xl shadow-2xl">
+        <h2 class="text-2xl font-bold text-primary mb-4 border-b-2 border-primary pb-2">2. Kiến Trúc Tổng Thể: Mô Hình
+          Client-Server</h2>
+        <p class="text-lg leading-relaxed text-gray-600 mb-6">
+          Mô hình Client-Server là nền tảng cơ bản của Internet. Nó mô tả cách hai chương trình máy tính tương tác:
+        </p>
+
+        <!-- Hình ảnh minh họa Client-Server (Đã nhúng trực tiếp) -->
+        <div class="my-6 flex justify-center">
+          <img
+            src="https://s3-hfx03.fptcloud.com/codelearnstorage/Upload/Blog/tim-hieu-ve-mo-hinh-client-server-63739412528.8042.jpg"
+            alt="Sơ đồ kiến trúc Client-Server" class="rounded-lg shadow-md max-w-full h-auto">
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 mt-8">
+          <!-- Client -->
+          <div class="bg-indigo-50 p-6 rounded-lg border-l-4 border-primary shadow-md">
+            <h3 class="text-xl font-semibold text-primary mb-3 flex items-center">
+              <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9.75 17L9 20l-1 1h8l-1-1h-.75M3 11V9a2 2 0 012-2h14a2 2 0 012 2v2M3 11h18M3 11l-3 5m24-5l-3 5m-18 0l-4 4h20l-4-4">
+                </path>
+              </svg>
+              Client (Trình Duyệt)
+            </h3>
+            <p class="text-gray-700">Là thiết bị (máy tính, điện thoại) và phần mềm (Chrome, Firefox) mà người dùng sử
+              dụng để truy cập trang web. Client gửi yêu cầu (Request) tới Server và hiển thị dữ liệu nhận được.</p>
+          </div>
+
+          <!-- Server -->
+          <div class="bg-indigo-50 p-6 rounded-lg border-l-4 border-secondary shadow-md">
+            <h3 class="text-xl font-semibold text-secondary mb-3 flex items-center">
+              <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M5 12h14M5 12a2 2 0 01-2-2V7a2 2 0 012-2h14a2 2 0 012 2v3a2 2 0 01-2 2M5 12a2 2 0 00-2 2v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 00-2-2">
+                </path>
+              </svg>
+              Server (Máy Chủ)
+            </h3>
+            <p class="text-gray-700">Là máy tính mạnh mẽ lưu trữ tất cả các tài liệu của trang web. Server xử lý yêu
+              cầu, lấy dữ liệu và gửi phản hồi (Response) trở lại cho Client.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Các Thành Phần Chính của Trang Web -->
+    <section class="mb-12">
+      <div class="bg-white p-8 rounded-xl shadow-2xl">
+        <h2 class="text-2xl font-bold text-primary mb-4 border-b-2 border-primary pb-2">3. Các Thành Phần Chính</h2>
+
+        <!-- Hình ảnh minh họa tổng quan (Đã nhúng trực tiếp) -->
+        <div class="my-6 flex justify-center">
+          <img
+            src="https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/589426957_4188033318079825_3028310690084564074_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=u1rgbvUui9kQ7kNvwGwNCfb&_nc_oc=AdkvmBTQhiGbV_pXCIaeYnqw_lQHs4nvKyjmhSjy80hXI4neN3rPaJ9gedemypyrnJ8&_nc_zt=23&_nc_ht=scontent.fsgn8-4.fna&_nc_gid=u1cMy0JMOBB-nFECBF3PQQ&oh=00_Afgz20qMUF7og0fj-0ebXeTHWwwfVMo5n3q9Q3XkgbAaMA&oe=6930BBE9"
+            alt="Sơ đồ kiến trúc website tổng thể" class="rounded-lg shadow-md max-w-full h-auto">
+        </div>
+
+        <!-- Frontend -->
+        <div class="mb-8">
+          <h3 class="text-xl font-extrabold text-primary mb-4 p-3 bg-indigo-100 rounded-lg">3.1. Frontend (Phía Client -
+            Giao Diện Người Dùng)</h3>
+          <p class="text-gray-700 mb-4">Đây là phần người dùng nhìn thấy và tương tác trực tiếp. Nó được xây dựng bằng
+            ba công nghệ cơ bản:</p>
+
+          <ul class="space-y-4">
+            <li class="p-4 bg-gray-50 rounded-lg shadow-inner border-l-4 border-red-500 flex items-center">
+              <!-- SVG Icon: Code for HTML/Structure -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="mr-4 min-w-[32px]">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+              <div>
+                <strong class="text-red-600">HTML (HyperText Markup Language):</strong> <br>
+                <span class="text-gray-700">Là "bộ xương" của trang web, xác định cấu trúc và nội dung (tiêu đề, đoạn
+                  văn, hình ảnh, liên kết).</span>
+              </div>
+            </li>
+            <li class="p-4 bg-gray-50 rounded-lg shadow-inner border-l-4 border-blue-500 flex items-center">
+              <!-- SVG Icon: Palette for CSS/Style -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="mr-4 min-w-[32px]">
+                <path d="M12 2v20"></path>
+                <path d="m18.4 7.6-2.1 2.1"></path>
+                <path d="m5.6 16.4 2.1-2.1"></path>
+                <path d="m7.6 18.4 2.1-2.1"></path>
+                <path d="m16.4 5.6-2.1 2.1"></path>
+                <path d="M2 12h20"></path>
+                <path d="m5.6 7.6 2.1 2.1"></path>
+                <path d="m18.4 16.4-2.1-2.1"></path>
+              </svg>
+              <div>
+                <strong class="text-blue-600">CSS (Cascading Style Sheets):</strong> <br>
+                <span class="text-gray-700">Là "quần áo" của trang web, xác định phong cách và giao diện (màu sắc, bố
+                  cục, font chữ, hiệu ứng động).</span>
+              </div>
+            </li>
+            <li class="p-4 bg-gray-50 rounded-lg shadow-inner border-l-4 border-yellow-500 flex items-center">
+              <!-- SVG Icon: Zap for JavaScript/Interaction -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="mr-4 min-w-[32px]">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+              <div>
+                <strong class="text-yellow-600">JavaScript (JS):</strong> <br>
+                <span class="text-gray-700">Là "bộ não" của Frontend, thêm tương tác và hành vi (hiệu ứng click, xác
+                  thực form, tải dữ liệu động).</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Backend -->
+        <div class="mb-8">
+          <h3 class="text-xl font-extrabold text-secondary mb-4 p-3 bg-green-100 rounded-lg">3.2. Backend (Phía Server -
+            Logic Xử Lý)</h3>
+          <p class="text-gray-700 mb-4">Đây là "hậu trường" không hiển thị ra cho người dùng, nơi xử lý logic nghiệp vụ,
+            bảo mật và lưu trữ dữ liệu. Nó bao gồm:</p>
+
+          <ul class="space-y-4">
+            <li class="p-4 bg-gray-50 rounded-lg shadow-inner border-l-4 border-green-500 flex items-center">
+              <!-- SVG Icon: Server for Application Server -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="mr-4 min-w-[32px]">
+                <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
+                <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
+                <line x1="6" x2="6" y1="6" y2="6"></line>
+                <line x1="6" x2="6" y1="18" y2="18"></line>
+              </svg>
+              <div>
+                <strong class="text-green-600">Application Server (Máy chủ Ứng dụng):</strong> <br>
+                <span class="text-gray-700">Thực hiện các tác vụ như xử lý yêu cầu, chạy mã logic (viết bằng Python,
+                  Java, Node.js, PHP...), và tạo ra dữ liệu để gửi về Client.</span>
+              </div>
+            </li>
+            <li class="p-4 bg-gray-50 rounded-lg shadow-inner border-l-4 border-purple-500 flex items-center">
+              <!-- SVG Icon: Database -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="#9333ea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="mr-4 min-w-[32px]">
+                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                <path d="M3 5v14a9 3 0 0 0 18 0V5"></path>
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+              </svg>
+              <div>
+                <strong class="text-purple-600">Database (Cơ Sở Dữ Liệu):</strong> <br>
+                <span class="text-gray-700">Lưu trữ tất cả thông tin quan trọng của trang web (dữ liệu người dùng, bài
+                  viết, sản phẩm, v.v.). Các ví dụ phổ biến: MySQL, PostgreSQL, MongoDB.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Mạng -->
+        <div>
+          <h3 class="text-xl font-extrabold text-primary mb-4 p-3 bg-indigo-100 rounded-lg">3.3. Giao Thức và Mạng</h3>
+          <p class="text-gray-700">Để Client và Server nói chuyện được với nhau, chúng sử dụng các giao thức:</p>
+          <ul class="space-y-4 mt-4">
+            <li class="p-4 bg-gray-50 rounded-lg shadow-inner border-l-4 border-pink-500 flex items-center">
+              <!-- SVG Icon: Lock for HTTPS -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="#ec4899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="mr-4 min-w-[32px]">
+                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <div>
+                <strong class="text-pink-600">HTTP/HTTPS:</strong> <br>
+                <span class="text-gray-700">Giao thức truyền siêu văn bản, là ngôn ngữ chính để truyền dữ liệu giữa
+                  Client và Server. HTTPS là phiên bản bảo mật hơn (được mã hóa).</span>
+              </div>
+            </li>
+            <li class="p-4 bg-gray-50 rounded-lg shadow-inner border-l-4 border-teal-500 flex items-center">
+              <!-- SVG Icon: Link/Chain for URL -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="#14b8a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="mr-4 min-w-[32px]">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+              <div>
+                <strong class="text-teal-600">URL (Uniform Resource Locator):</strong> <br>
+                <span class="text-gray-700">Địa chỉ duy nhất để xác định vị trí của tài nguyên trên mạng
+                  Internet.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white p-6 mt-12">
+    <div class="max-w-7xl mx-auto text-center">
+      <p>&copy; 2025 Kiến Trúc Web. Thiết kế minh họa bằng Tailwind CSS.</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>

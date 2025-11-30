@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Accessible login form with labels and native validation.">
+	<meta property="og:title" content="Day 2 — Login">
+	<meta property="og:description" content="Email and password login form with accessibility best practices.">
+	<title>Login</title>
+	<link rel="icon" href="data:,">
+</head>
+<body>
+	<header>
+		<h1>Login</h1>
+		<p>Sign in with your email and password.</p>
+	</header>
+
+	<main>
+		<section aria-labelledby="login">
+			<h2 id="login">Login</h2>
+			<form action="#" method="post" novalidate aria-describedby="login-help">
+				<p id="login-help">Fields marked * are required.</p>
+
+				<div>
+					<label for="li-email">Email *</label>
+					<input id="li-email" name="email" type="email" required autocomplete="username" inputmode="email">
+				</div>
+
+				<div>
+					<label for="li-password">Password *</label>
+					<input id="li-password" name="password" type="password" required minlength="8" autocomplete="current-password">
+				</div>
+
+				<div>
+					<input id="li-remember" name="remember" type="checkbox">
+					<label for="li-remember">Remember me</label>
+				</div>
+
+				<p><a href="#" rel="nofollow">Forgot password?</a></p>
+
+				<button type="submit">Sign in</button>
+			</form>
+		</section>
+	</main>
+</body>
+</html>
+
+

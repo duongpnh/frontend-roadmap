@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Accessible signup and contact forms using labels, fieldsets, and native validation.">
+	<meta property="og:title" content="Day 2 — Forms Basics">
+	<meta property="og:description" content="Hands-on HTML forms with accessibility and validation best practices.">
+	<title>Day 2 — Forms Basics</title>
+	<link rel="icon" href="data:,">
+</head>
+<body>
+	<header>
+		<h1>Forms Basics</h1>
+		<p>Signup and Contact forms with accessible labels and native validation.</p>
+	</header>
+
+	<main>
+		<section aria-labelledby="contact">
+			<h2 id="contact">Contact</h2>
+			<form action="#" method="post">
+				<fieldset>
+					<legend>Your details</legend>
+					<div>
+						<label for="ct-name">Name *</label>
+						<input id="ct-name" name="name" type="text" required>
+					</div>
+					<div>
+						<label for="ct-email">Email *</label>
+						<input id="ct-email" name="email" type="email" required>
+					</div>
+				</fieldset>
+
+				<fieldset>
+					<legend>Message</legend>
+					<div>
+						<label for="ct-topic">Topic</label>
+						<select id="ct-topic" name="topic">
+							<option value="general">General</option>
+							<option value="support">Support</option>
+							<option value="feedback">Feedback</option>
+						</select>
+					</div>
+					<div>
+						<label for="ct-message">Message *</label>
+						<textarea id="ct-message" name="message" rows="5" required></textarea>
+					</div>
+				</fieldset>
+
+				<div>
+					<label>
+						<input type="checkbox" name="agree" required>
+						I agree to the terms *
+					</label>
+				</div>
+
+				<button type="submit">Send</button>
+			</form>
+		</section>
+	</main>
+</body>
+</html>
+

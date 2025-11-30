@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Accessible file upload form using proper encoding type.">
+	<meta property="og:title" content="Day 2 — File Upload">
+	<meta property="og:description" content="Upload single or multiple files with labels and constraints.">
+	<title>File Upload</title>
+	<link rel="icon" href="data:,">
+</head>
+<body>
+	<header>
+		<h1>File Upload</h1>
+		<p>Upload files using <code>enctype="multipart/form-data"</code>.</p>
+	</header>
+
+	<main>
+		<section aria-labelledby="upload">
+			<h2 id="upload">Upload</h2>
+			<form action="#" method="post" enctype="multipart/form-data" aria-describedby="upload-help">
+				<p id="upload-help">Choose one or more files. Allowed: images (PNG, JPG), PDF.</p>
+
+				<div>
+					<label for="fu-files">Files *</label>
+					<input id="fu-files" name="files" type="file" required accept=".png,.jpg,.jpeg,application/pdf,image/png,image/jpeg" multiple>
+				</div>
+
+				<div>
+					<label for="fu-notes">Notes</label>
+					<textarea id="fu-notes" name="notes" rows="3" placeholder="Optional notes about your upload"></textarea>
+				</div>
+
+				<button type="submit">Upload</button>
+			</form>
+		</section>
+	</main>
+</body>
+</html>
+
+

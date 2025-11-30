@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Form Quiz</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #111834;
+      --text: #e6eaf2;
+      --muted: #9aa3b2;
+      --primary: #4f46e5;
+      --primary-600: #4338ca;
+      --green: #16a34a;
+      --red: #dc2626;
+      --yellow: #f59e0b;
+      --border: #1f2a4a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 80% -20%, #1c2350 0%, rgba(28, 35, 80, 0) 60%), radial-gradient(1000px 700px at -10% 110%, #1d274b 0%, rgba(29, 39, 75, 0) 60%), var(--bg);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .quiz-shell {
+      width: 100%;
+      max-width: 860px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .title {
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+    }
+
+    .title .badge {
+      font-size: 12px;
+      color: var(--yellow);
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .progress {
+      position: relative;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress>span {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), #22c55e);
+      transition: width 360ms ease;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      transform-origin: 50% 40%;
+      animation: cardIn 420ms cubic-bezier(.2, .8, .2, 1);
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.985);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .card-body {
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .q-head {
+      display: grid;
+      gap: 8px;
+    }
+
+    .q-index {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: .3px;
+    }
+
+    .q-text {
+      font-size: 20px;
+      line-height: 1.45;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+      user-select: none;
+    }
+
+    .option:hover {
+      transform: translateY(-1px);
+      border-color: rgba(79, 70, 229, 0.55);
+      background: rgba(79, 70, 229, 0.08);
+    }
+
+    .option.selected {
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    .option.correct {
+      border-color: rgba(34, 197, 94, 0.7);
+      background: rgba(34, 197, 94, 0.08);
+    }
+
+    .option.incorrect {
+      border-color: rgba(220, 38, 38, 0.7);
+      background: rgba(220, 38, 38, 0.06);
+    }
+
+    .option .letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      flex: 0 0 auto;
+    }
+
+    .explain {
+      display: none;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      animation: fadeIn 300ms ease;
+    }
+
+    .explain.show {
+      display: block;
+    }
+
+    .explain.success {
+      border-color: rgba(22, 163, 74, 0.6);
+      background: rgba(22, 163, 74, 0.08);
+    }
+
+    .explain.error {
+      border-color: rgba(220, 38, 38, 0.6);
+      background: rgba(220, 38, 38, 0.08);
+    }
+
+    .explain .label {
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .explain.success .label {
+      color: var(--green);
+    }
+
+    .explain.error .label {
+      color: var(--red);
+    }
+
+    .explain pre {
+      margin: 10px 0 0;
+      padding: 12px;
+      background: #0d1228;
+      color: #e7ecf7;
+      border: 1px solid #263156;
+      border-radius: 10px;
+      overflow: auto;
+      max-height: 260px;
+    }
+
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 24px 24px;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: var(--primary);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform 120ms ease, background 120ms ease, opacity 120ms ease;
+    }
+
+    .btn:hover {
+      background: var(--primary-600);
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .meta {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Summary styles */
+    .summary {
+      display: grid;
+      gap: 14px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .score {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      background: linear-gradient(90deg, #22c55e, #4f46e5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    @media (max-width: 720px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="quiz-shell">
+    <div class="header">
+      <div class="title">
+        <span>HTML Form Quiz</span>
+        <span class="badge">15 questions</span>
+      </div>
+      <div class="meta"><span id="meta-progress">0/15</span></div>
+    </div>
+
+    <div class="progress"><span id="progress-bar"></span></div>
+
+    <section id="stage" class="card" aria-live="polite"></section>
+  </div>
+
+  <script>
+    const LETTERS = ["A", "B", "C", "D"];
+
+    const quizData = [
+      {
+        q: "Form trong HTML có vai trò chính là gì?",
+        options: [
+          "Hiển thị nội dung lên trang",
+          "Nhận và gửi dữ liệu người dùng",
+          "Tạo hiệu ứng giao diện",
+          "Lưu dữ liệu vào database trực tiếp"
+        ],
+        correctIndex: 1,
+        explanation: "Form dùng để thu thập và gửi dữ liệu đến server hay API. Không thể lưu database trực tiếp bằng HTML.",
+        example: `<form action="/login" method="POST">
+  <input name="username">
+  <button>Login</button>
+</form>`
+      },
+      {
+        q: "Khi nào ta cần sử dụng form?",
+        options: [
+          "Khi trang web cần animation",
+          "Khi thu thập input của người dùng (đăng nhập, tìm kiếm, đăng ký, khảo sát…)",
+          "Khi hiển thị thông tin",
+          "Khi viết CSS"
+        ],
+        correctIndex: 1,
+        explanation: "Form là công cụ để nhập liệu. Không dùng cho hiển thị hoặc style."
+      },
+      {
+        q: "Form gửi dữ liệu đến đâu?",
+        options: [
+          "Bộ nhớ RAM",
+          "Database",
+          "URL hoặc server xử lý được chỉ định bởi action",
+          "Trình duyệt Chrome"
+        ],
+        correctIndex: 2,
+        explanation: "action=\"/submit\" nghĩa là dữ liệu gửi đến endpoint đó. Form không giao tiếp trực tiếp database."
+      },
+      {
+        q: "Thuộc tính nào của form quyết định cách dữ liệu được gửi đi?",
+        options: ["filter", "action", "method", "role"],
+        correctIndex: 2,
+        explanation: "method thường là GET hoặc POST."
+      },
+      {
+        q: "Vì sao không nên gửi mật khẩu bằng method=\"GET\"?",
+        options: [
+          "GET gửi chậm hơn",
+          "GET không hỗ trợ tiếng Việt",
+          "GET đưa dữ liệu lên URL → dễ bị lộ",
+          "GET không gửi được dữ liệu"
+        ],
+        correctIndex: 2,
+        explanation: "Dữ liệu của GET được hiển thị trong query string của URL."
+      },
+      {
+        q: "Thuộc tính nào giúp đảm bảo form login gửi dữ liệu an toàn hơn?",
+        options: ["method=\"get\"", "method=\"post\"", "method=\"secure\"", "Không ảnh hưởng"],
+        correctIndex: 1,
+        explanation: "POST không lộ dữ liệu lên URL, phù hợp cho thông tin nhạy cảm."
+      },
+      {
+        q: "Tại sao cần <label> khi tạo form?",
+        options: ["Vì đẹp hơn", "Tăng SEO", "Giúp người dùng (và người dùng khuyết tật) biết input để làm gì", "Dùng để gửi dữ liệu"],
+        correctIndex: 2,
+        explanation: "<label> hỗ trợ accessibility (screen reader, clickable area).",
+        example: `<label for="email">Email</label>
+<input id="email" type="email">`
+      },
+      {
+        q: "Điều gì sẽ xảy ra nếu form không có nút submit?",
+        options: [
+          "Form tự động gửi",
+          "Không thể gửi dữ liệu",
+          "Trình duyệt báo lỗi",
+          "Dữ liệu gửi ngẫu nhiên"
+        ],
+        correctIndex: 1,
+        explanation: "Cần <button type=\"submit\"> hoặc <input type=\"submit\">."
+      },
+      {
+        q: "Tại sao form tìm kiếm (search bar) thường dùng GET thay vì POST?",
+        options: [
+          "GET đẹp hơn",
+          "GET nhanh hơn",
+          "GET giúp bookmark, chia sẻ URL với query dễ dàng",
+          "GET bảo mật hơn"
+        ],
+        correctIndex: 2,
+        explanation: "Ví dụ: /search?q=javascript dễ chia sẻ/ghi lại lịch sử."
+      },
+      {
+        q: "Thuộc tính nào ngăn trình duyệt lưu thông tin người dùng đã nhập?",
+        options: [
+          "secure=\"false\"",
+          "track=\"off\"",
+          "autocomplete=\"off\"",
+          "autofill=\"none\""
+        ],
+        correctIndex: 2,
+        explanation: "Tắt tự động điền giúp tăng riêng tư cho một số form.",
+        example: `<form autocomplete="off">`
+      },
+      {
+        q: "Form có gửi file được không? Nếu có, cần điều kiện gì?",
+        options: [
+          "Không, HTML không hỗ trợ",
+          "Có, chỉ cần <input type=\"file\">",
+          "Có nhưng phải dùng JS",
+          "Có, và form phải có enctype=\"multipart/form-data\""
+        ],
+        correctIndex: 3,
+        explanation: "Upload file yêu cầu enctype=multipart/form-data để gửi binary đúng định dạng.",
+        example: `<form method="POST" enctype="multipart/form-data">
+  <input type="file">
+</form>`
+      },
+      {
+        q: "Vì sao cần name cho mỗi input khi gửi form?",
+        options: [
+          "Vì HTML yêu cầu",
+          "Vì input không hoạt động nếu thiếu name",
+          "Vì server sẽ không nhận được giá trị nếu input không có name",
+          "Vì name giúp styling"
+        ],
+        correctIndex: 2,
+        explanation: "Dữ liệu gửi đi dạng name=value. Nếu không có name → không gửi value."
+      },
+      {
+        q: "Tại sao nên dùng <fieldset> khi form dài và nhiều nhóm?",
+        options: [
+          "Để trang web đẹp hơn",
+          "Tăng responsive",
+          "Dễ nhóm logic, tăng UX và accessibility",
+          "Nhanh hơn về hiệu năng"
+        ],
+        correctIndex: 2,
+        explanation: "Giúp nhóm nội dung liên quan, dễ đọc và hỗ trợ công nghệ hỗ trợ.",
+        example: `<fieldset>
+  <legend>Thông tin cá nhân</legend>
+</fieldset>`
+      },
+      {
+        q: "Form validation nên được thực hiện ở đâu?",
+        options: ["Chỉ ở HTML", "Chỉ ở server", "Chỉ ở JavaScript", "Cả frontend (HTML/JS) và server"],
+        correctIndex: 3,
+        explanation: "Frontend để trải nghiệm người dùng tốt, server để bảo mật."
+      },
+      {
+        q: "Tại sao nên hạn chế dùng form quá dài?",
+        options: [
+          "Làm web nặng",
+          "Người dùng sẽ bỏ cuộc → giảm tỉ lệ hoàn thành",
+          "Không tương thích mobile",
+          "HTML không cho phép form dài"
+        ],
+        correctIndex: 1,
+        explanation: "Form càng dài → tỉ lệ hoàn thành càng thấp → UX kém. Nên cân nhắc multi-step form."
+      }
+    ];
+
+    const stage = document.getElementById("stage");
+    const progressBar = document.getElementById("progress-bar");
+    const metaProgress = document.getElementById("meta-progress");
+
+    let order = [];
+    let current = 0;
+    let score = 0;
+    let answered = false;
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function escapeHtml(str) {
+      return str.replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+    }
+
+    function setProgress() {
+      metaProgress.textContent = `${Math.min(current + 1, order.length)}/${order.length}`;
+      const pct = (current) / order.length * 100;
+      progressBar.style.width = `${pct}%`;
+    }
+
+    function renderQuestion() {
+      const q = quizData[order[current]];
+
+      const options = q.options.map((text, i) => {
+        return `<div class="option" data-index="${i}" role="button" tabindex="0" aria-pressed="false">
+  <div class="letter">${LETTERS[i]}</div>
+  <div>${escapeHtml(text)}</div>
+</div>`;
+      }).join("");
+
+      stage.innerHTML = `
+        <div class="card-body">
+          <div class="q-head">
+            <div class="q-index">Câu ${current + 1}/${order.length}</div>
+            <div class="q-text">${escapeHtml(q.q)}</div>
+          </div>
+          <div class="options" id="options">${options}</div>
+          <div id="explain" class="explain" aria-live="polite"></div>
+        </div>
+        <div class="footer">
+          <button id="resetBtn" class="btn ghost">Reset</button>
+          <div style="display:flex; gap:10px; align-items:center">
+            <span class="meta" id="hint">${answered ? "Chọn đáp án để xem giải thích" : ""}</span>
+            <button id="nextBtn" class="btn" disabled>Tiếp theo</button>
+          </div>
+        </div>
+      `;
+
+      answered = false;
+      bindHandlers();
+      setProgress();
+    }
+
+    function bindHandlers() {
+      const q = quizData[order[current]];
+      const list = stage.querySelectorAll(".option");
+      const explainBox = stage.querySelector("#explain");
+      const nextBtn = stage.querySelector("#nextBtn");
+      const resetBtn = stage.querySelector("#resetBtn");
+
+      list.forEach(el => {
+        const idx = Number(el.getAttribute("data-index"));
+        const select = () => {
+          if (answered) return;
+          answered = true;
+
+          list.forEach(n => n.classList.remove("selected"));
+          el.classList.add("selected");
+
+          const isCorrect = idx === q.correctIndex;
+          if (isCorrect) {
+            el.classList.add("correct");
+            score += 1;
+          } else {
+            el.classList.add("incorrect");
+            const correctEl = Array.from(list)[q.correctIndex];
+            correctEl.classList.add("correct");
+          }
+
+          const label = isCorrect ? "Chính xác!" : "Chưa chính xác";
+          const cls = isCorrect ? "success" : "error";
+          const exampleBlock = q.example ? `<pre><code>${escapeHtml(q.example)}</code></pre>` : "";
+
+          explainBox.className = `explain show ${cls}`;
+          explainBox.innerHTML = `<div class="label">${label}</div><div>${escapeHtml(q.explanation)}</div>${exampleBlock}`;
+
+          nextBtn.disabled = false;
+        };
+
+        el.addEventListener("click", select);
+        el.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            select();
+          }
+        });
+      });
+
+      nextBtn.addEventListener("click", nextStep);
+      resetBtn.addEventListener("click", resetQuiz);
+    }
+
+    function nextStep() {
+      if (current < order.length - 1) {
+        current += 1;
+        renderQuestion();
+      } else {
+        showSummary();
+      }
+    }
+
+    function showSummary() {
+      progressBar.style.width = "100%";
+      metaProgress.textContent = `${order.length}/${order.length}`;
+
+      stage.innerHTML = `
+        <div class="summary">
+          <div class="score">${score}/${order.length}</div>
+          <div class="grid">
+            <div class="pill">Đúng: <strong style="color: var(--green)">${score}</strong></div>
+            <div class="pill">Sai: <strong style="color: var(--red)">${order.length - score}</strong></div>
+          </div>
+          <div class="meta">Hoàn thành quiz về HTML Forms. Bạn có thể làm lại để luyện tập thêm.</div>
+          <div style="display:flex; justify-content:center; gap:12px; margin-top: 4px;">
+            <button class="btn" id="again">Làm lại</button>
+          </div>
+        </div>
+      `;
+
+      const again = document.getElementById("again");
+      again.addEventListener("click", resetQuiz);
+    }
+
+    function resetQuiz() {
+      order = shuffle(quizData.map((_, i) => i));
+      current = 0;
+      score = 0;
+      answered = false;
+      renderQuestion();
+    }
+
+    // init
+    resetQuiz();
+  </script>
+</body>
+
+</html>
