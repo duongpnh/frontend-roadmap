@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Form Quiz</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #111834;
+      --text: #e6eaf2;
+      --muted: #9aa3b2;
+      --primary: #4f46e5;
+      --primary-600: #4338ca;
+      --green: #16a34a;
+      --red: #dc2626;
+      --yellow: #f59e0b;
+      --border: #1f2a4a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 80% -20%, #1c2350 0%, rgba(28, 35, 80, 0) 60%), radial-gradient(1000px 700px at -10% 110%, #1d274b 0%, rgba(29, 39, 75, 0) 60%), var(--bg);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .quiz-shell {
+      width: 100%;
+      max-width: 860px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .title {
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+    }
+
+    .title .badge {
+      font-size: 12px;
+      color: var(--yellow);
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .progress {
+      position: relative;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress>span {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), #22c55e);
+      transition: width 360ms ease;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      transform-origin: 50% 40%;
+      animation: cardIn 420ms cubic-bezier(.2, .8, .2, 1);
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.985);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .card-body {
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .q-head {
+      display: grid;
+      gap: 8px;
+    }
+
+    .q-index {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: .3px;
+    }
+
+    .q-text {
+      font-size: 20px;
+      line-height: 1.45;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+      user-select: none;
+    }
+
+    .option:hover {
+      transform: translateY(-1px);
+      border-color: rgba(79, 70, 229, 0.55);
+      background: rgba(79, 70, 229, 0.08);
+    }
+
+    .option.selected {
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    .option.correct {
+      border-color: rgba(34, 197, 94, 0.7);
+      background: rgba(34, 197, 94, 0.08);
+    }
+
+    .option.incorrect {
+      border-color: rgba(220, 38, 38, 0.7);
+      background: rgba(220, 38, 38, 0.06);
+    }
+
+    .option .letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      flex: 0 0 auto;
+    }
+
+    .explain {
+      display: none;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      animation: fadeIn 300ms ease;
+    }
+
+    .explain.show {
+      display: block;
+    }
+
+    .explain.success {
+      border-color: rgba(22, 163, 74, 0.6);
+      background: rgba(22, 163, 74, 0.08);
+    }
+
+    .explain.error {
+      border-color: rgba(220, 38, 38, 0.6);
+      background: rgba(220, 38, 38, 0.08);
+    }
+
+    .explain .label {
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .explain.success .label {
+      color: var(--green);
+    }
+
+    .explain.error .label {
+      color: var(--red);
+    }
+
+    .explain pre {
+      margin: 10px 0 0;
+      padding: 12px;
+      background: #0d1228;
+      color: #e7ecf7;
+      border: 1px solid #263156;
+      border-radius: 10px;
+      overflow: auto;
+      max-height: 260px;
+    }
+
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 24px 24px;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: var(--primary);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform 120ms ease, background 120ms ease, opacity 120ms ease;
+    }
+
+    .btn:hover {
+      background: var(--primary-600);
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .meta {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Summary styles */
+    .summary {
+      display: grid;
+      gap: 14px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .score {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      background: linear-gradient(90deg, #22c55e, #4f46e5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    @media (max-width: 720px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="quiz-shell">
+    <div class="header">
+      <div class="title">
+        <span>HTML Form Quiz - More Advanced</span>
+        <span class="badge">30 questions</span>
+      </div>
+      <div class="meta"><span id="meta-progress">0/30</span></div>
+    </div>
+
+    <div class="progress"><span id="progress-bar"></span></div>
+
+    <section id="stage" class="card" aria-live="polite"></section>
+  </div>
+
+  <script>
+    const LETTERS = ["A", "B", "C", "D"];
+
+    const quizData = [
+      {
+        q: "Mục đích chính của HTML form là gì?",
+        options: [
+          "Trang trí giao diện web",
+          "Thu thập và gửi dữ liệu từ người dùng lên server",
+          "Tối ưu SEO",
+          "Tải hình ảnh nhanh hơn"
+        ],
+        correctIndex: 1,
+        explanation: "Form là cơ chế để gửi dữ liệu từ client → server.",
+        example: `<form action="/register" method="POST">`
+      },
+      {
+        q: "Khi nào bạn nên sử dụng form?",
+        options: [
+          "Khi cần hiển thị dữ liệu",
+          "Khi cần gửi dữ liệu hoặc tương tác nhập liệu từ người dùng",
+          "Khi tạo layout",
+          "Khi thêm ảnh minh họa"
+        ],
+        correctIndex: 1,
+        explanation: "Form là công cụ để nhập liệu, chẳng hạn như đăng ký, tìm kiếm, đăng nhập."
+      },
+      {
+        q: "Thuộc tính nào giúp form gửi dữ liệu an toàn hơn (ẩn URL)?",
+        options: ["GET", "POST", "PUT", "SEND"],
+        correctIndex: 1,
+        explanation: "POST không để lộ dữ liệu trong query string trên URL, phù hợp cho thông tin nhạy cảm."
+      },
+      {
+        q: "Thuộc tính nào bắt buộc phải có nếu form “upload file”?",
+        options: [
+          "method=\"GET\"",
+          "action=\"/upload\"",
+          "enctype=\"multipart/form-data\"",
+          "target=\"_blank\""
+        ],
+        correctIndex: 2,
+        explanation: "Upload file yêu cầu `enctype=\"multipart/form-data\"` để gửi dữ liệu binary đúng định dạng."
+      },
+      {
+        q: "Khi nào ta nên dùng method=\"GET\" thay vì POST\"?",
+        options: [
+          "Khi dữ liệu nhạy cảm",
+          "Khi gửi tài liệu lớn",
+          "Khi dữ liệu là truy vấn tìm kiếm, không nhạy cảm",
+          "Khi gửi mật khẩu"
+        ],
+        correctIndex: 2,
+        explanation: "Dùng GET cho tìm kiếm để dễ dàng bookmark hoặc chia sẻ URL chứa query string."
+      },
+      {
+        q: "Điều gì xảy ra khi thiếu thuộc tính name trong <input>?",
+        options: [
+          "Form vẫn gửi dữ liệu bình thường",
+          "Input bị vô hiệu hóa",
+          "Dữ liệu của input không được gửi lên server",
+          "Trình duyệt báo lỗi"
+        ],
+        correctIndex: 2,
+        explanation: "Server nhận dữ liệu dưới dạng `name=value`. Thiếu `name`, input không gửi giá trị."
+      },
+      {
+        q: "Thuộc tính nào hỗ trợ “client-side validation” mặc định?",
+        options: ["required, pattern, min, max", "validate, check, compare", "rule, expect, strict", "Không có thuộc tính nào"],
+        correctIndex: 0,
+        explanation: "Các thuộc tính như `required`, `pattern`, `min`, `max` cho phép trình duyệt tự kiểm tra tính hợp lệ của dữ liệu trước khi gửi."
+      },
+      {
+        q: "HTML form giúp cải thiện accessibility bằng cách nào?",
+        options: [
+          "Thêm màu sắc",
+          "Sử dụng <label for=\"\"> liên kết với input",
+          "Dùng id khác nhau",
+          "Dùng placeholder thay cho label"
+        ],
+        correctIndex: 1,
+        explanation: "Thẻ `<label>` với thuộc tính `for` liên kết với `id` của input giúp người dùng khuyết tật (dùng screen reader) biết input đó để làm gì."
+      },
+      {
+        q: "Input nào giúp nhập số có thể tăng/giảm bằng nút?",
+        options: [
+          "input type=\"digit\"",
+          "input type=\"range\"",
+          "input type=\"number\"",
+          "input type=\"scroll\""
+        ],
+        correctIndex: 2,
+        explanation: "`<input type=\"number\">` cung cấp giao diện nhập số và các nút tăng/giảm giá trị."
+      },
+      {
+        q: "Thuộc tính novalidate dùng để làm gì?",
+        options: [
+          "Tắt auto-fill",
+          "Tắt client-side validation",
+          "Tự động xác minh dữ liệu",
+          "Tắt gửi form"
+        ],
+        correctIndex: 1,
+        explanation: "Đặt thuộc tính `novalidate` trên thẻ `<form>` sẽ bỏ qua các quy tắc kiểm tra hợp lệ mặc định của trình duyệt (HTML validation)."
+      },
+      {
+        q: "Tại sao không nên dùng placeholder làm label?",
+        options: [
+          "Placeholder mờ và biến mất khi nhập",
+          "Ảnh hưởng SEO",
+          "Tốn dung lượng",
+          "Không phải lý do đáng lo"
+        ],
+        correctIndex: 0,
+        explanation: "Placeholder không thay thế được label vì nó mờ và biến mất khi người dùng nhập liệu, gây khó khăn cho người dùng và accessibility."
+      },
+      {
+        q: "Thuộc tính nào giúp autocomplete của trình duyệt hoạt động đúng cách?",
+        options: ["data", "autocomplete", "autofill", "restore"],
+        correctIndex: 1,
+        explanation: "Thuộc tính `autocomplete` gợi ý cho trình duyệt loại dữ liệu (ví dụ: `name`, `email`, `tel`) để điền tự động."
+      },
+      {
+        q: "Input nào tự động mở bàn phím số trên mobile?",
+        options: ["type=\"text\"", "type=\"number\"", "type=\"password\"", "type=\"tel\""],
+        correctIndex: 1,
+        explanation: "`<input type=\"number\">` trên mobile thường kích hoạt bàn phím số để nhập liệu thuận tiện hơn."
+      },
+      {
+        q: "Form nào là lựa chọn đúng khi đăng nhập?",
+        options: ["GET /login", "POST /login", "GET /user/data", "PUT /login"],
+        correctIndex: 1,
+        explanation: "Form đăng nhập phải dùng **POST** để gửi thông tin nhạy cảm (mật khẩu) mà không để lộ trên URL."
+      },
+      {
+        q: "Thuộc tính nào giúp gợi ý danh sách tùy chọn nhưng vẫn cho nhập tự do?",
+        options: ["<select>", "datalist", "autocomplete=\"list\"", "choices"],
+        correctIndex: 1,
+        explanation: "Thẻ `<datalist>` cung cấp danh sách tùy chọn cho `<input>` nhưng người dùng vẫn có thể nhập giá trị khác.",
+        example: `<input list="cities">
+<datalist id="cities">
+<option value="Hanoi">
+<option value="Saigon">
+</datalist>`
+      },
+      {
+        q: "Input nào cho phép chọn thời gian + ngày cùng lúc?",
+        options: ["datetime-local", "datetime", "date", "time"],
+        correctIndex: 0,
+        explanation: "`<input type=\"datetime-local\">` cho phép chọn cả ngày và giờ, khác với `date` (chỉ ngày) và `time` (chỉ giờ)."
+      },
+      {
+        q: "Khi người dùng nhập email, input nào giúp trình duyệt tự kiểm tra dạng hợp lệ?",
+        options: ["<input type=\"text\">", "<input type=\"email\">", "<mail-input>", "<input validate=\"email\">"],
+        correctIndex: 1,
+        explanation: "`<input type=\"email\">` sẽ kích hoạt validation mặc định của trình duyệt để đảm bảo định dạng email hợp lệ (có @ và domain)."
+      },
+      {
+        q: "Điều gì xảy ra khi input có disabled?",
+        options: [
+          "Vẫn được gửi lên server",
+          "Không được submit và không thể tương tác",
+          "Chỉ bị khóa nhưng vẫn gửi",
+          "Trình duyệt báo lỗi"
+        ],
+        correctIndex: 1,
+        explanation: "Input bị `disabled` sẽ không gửi dữ liệu và người dùng không thể tương tác với nó."
+      },
+      {
+        q: "Input có readonly hoạt động thế nào?",
+        options: [
+          "Không thể chỉnh sửa nhưng vẫn gửi lên server",
+          "Không được submit",
+          "Không hiển thị",
+          "Không thể focus"
+        ],
+        correctIndex: 0,
+        explanation: "Input bị `readonly` vẫn gửi dữ liệu lên server nhưng không thể chỉnh sửa, khác với `disabled`."
+      },
+      {
+        q: "Thuộc tính nào giới hạn độ dài ký tự nhập?",
+        options: ["maxtext", "limit", "maxlength", "maxchars"],
+        correctIndex: 2,
+        explanation: "`maxlength` quy định số lượng ký tự tối đa có thể nhập vào input."
+      },
+      {
+        q: "Tại sao nên gộp radio bằng name giống nhau?",
+        options: [
+          "Để radio đẹp hơn",
+          "Để chọn nhiều cái cùng lúc",
+          "Để đảm bảo chỉ chọn 1 trong nhóm",
+          "Không quan trọng"
+        ],
+        correctIndex: 2,
+        explanation: "Các radio button có cùng thuộc tính `name` sẽ tạo thành một nhóm, trong đó chỉ một lựa chọn duy nhất được phép chọn."
+      },
+      {
+        q: "Form nào cần CSRF token?",
+        options: ["Tất cả form GET", "Tất cả form POST nhạy cảm", "Form chứa số", "Form có checkbox"],
+        correctIndex: 1,
+        explanation: "CSRF token cần thiết cho các form gửi dữ liệu (thường là POST) để ngăn chặn tấn công Cross-Site Request Forgery."
+      },
+      {
+        q: "Input nào hữu ích cho password manager?",
+        options: [
+          "autocomplete=\"off\"",
+          "autocomplete=\"new-password\"",
+          "autocomplete=\"never\"",
+          "autocomplete=\"hide\""
+        ],
+        correctIndex: 1,
+        explanation: "Giá trị `new-password` giúp các trình quản lý mật khẩu biết đây là trường đặt mật khẩu mới."
+      },
+      {
+        q: "Vì sao HTML validation KHÔNG đủ cho bảo mật?",
+        options: [
+          "Trình duyệt đôi lúc bị lỗi",
+          "Người dùng có thể tắt validation và sửa POST request",
+          "HTML validation quá mạnh",
+          "Không liên quan"
+        ],
+        correctIndex: 1,
+        explanation: "HTML validation dễ dàng bị vô hiệu hóa ở client-side, do đó, **server-side validation** là bắt buộc để đảm bảo bảo mật và tính toàn vẹn của dữ liệu."
+      },
+      {
+        q: "Thẻ <fieldset> cải thiện UX bằng cách nào?",
+        options: [
+          "Gom nhóm form theo chủ đề",
+          "Tăng tốc submit",
+          "Giúp SEO",
+          "Gửi dữ liệu nhanh hơn"
+        ],
+        correctIndex: 0,
+        explanation: "`<fieldset>` dùng để nhóm các input có liên quan lại với nhau, tăng tính dễ đọc và accessibility.",
+        example: `<fieldset>
+<legend>Thông tin cá nhân</legend>
+</fieldset>`
+      },
+      {
+        q: "Thuộc tính nào để input autofocus khi load trang?",
+        options: ["focus=\"auto\"", "autofocus", "focus", "defaultFocus"],
+        correctIndex: 1,
+        explanation: "Thuộc tính `autofocus` sẽ tự động đặt con trỏ vào input đó khi trang tải xong."
+      },
+      {
+        q: "Thuộc tính pattern dùng để làm gì?",
+        options: [
+          "Gợi ý nhập",
+          "Buộc dữ liệu khớp regex pattern",
+          "Tự format dữ liệu",
+          "Tự động chỉnh lỗi"
+        ],
+        correctIndex: 1,
+        explanation: "`pattern` yêu cầu giá trị của input phải khớp với một biểu thức chính quy (regex) đã định nghĩa."
+      },
+      {
+        q: "Thuộc tính nào giúp chống bot spam?",
+        options: ["hidden honeypot input", "label for", "fieldset", "legend"],
+        correctIndex: 0,
+        explanation: "Kỹ thuật 'Honeypot' là tạo ra một input ẩn (bằng CSS hoặc `type=\"hidden\"`) mà người dùng thật không thấy, nhưng bot tự động sẽ điền vào. Nếu input này có dữ liệu, form sẽ bị từ chối."
+      },
+      {
+        q: "Khi submit form bằng JS nhưng không reload trang, dùng API nào?",
+        options: ["fetch()", "getElementById()", "console.log()", "XMLParser"],
+        correctIndex: 0,
+        explanation: "`fetch()` (hoặc `XMLHttpRequest`) là API dùng để gửi request bất đồng bộ (AJAX) đến server mà không cần tải lại trang."
+      },
+      {
+        q: "Khi nào nên dùng <button type=\"button\"> thay vì submit?",
+        options: [
+          "Khi muốn form tự submit",
+          "Khi nút chạy JS, không gửi form",
+          "Khi gửi dữ liệu",
+          "Khi tải trang mới"
+        ],
+        correctIndex: 1,
+        explanation: "Nếu `<button>` nằm trong `<form>` và không có `type` hoặc `type=\"submit\"`, nó sẽ mặc định gửi form. Dùng `type=\"button\"` khi nút đó chỉ dùng để kích hoạt các chức năng JavaScript (ví dụ: mở modal, validate form bằng tay, ...)."
+      }
+    ];
+
+    const stage = document.getElementById("stage");
+    const progressBar = document.getElementById("progress-bar");
+    const metaProgress = document.getElementById("meta-progress");
+
+    let order = [];
+    let current = 0;
+    let score = 0;
+    let answered = false;
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function escapeHtml(str) {
+      return str.replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+    }
+
+    function setProgress() {
+      metaProgress.textContent = `${Math.min(current + 1, order.length)}/${order.length}`;
+      const pct = (current) / order.length * 100;
+      progressBar.style.width = `${pct}%`;
+    }
+
+    function renderQuestion() {
+      const q = quizData[order[current]];
+
+      const options = q.options.map((text, i) => {
+        return `<div class="option" data-index="${i}" role="button" tabindex="0" aria-pressed="false">
+  <div class="letter">${LETTERS[i]}</div>
+  <div>${escapeHtml(text)}</div>
+</div>`;
+      }).join("");
+
+      stage.innerHTML = `
+        <div class="card-body">
+          <div class="q-head">
+            <div class="q-index">Câu ${current + 1}/${order.length}</div>
+            <div class="q-text">${escapeHtml(q.q)}</div>
+          </div>
+          <div class="options" id="options">${options}</div>
+          <div id="explain" class="explain" aria-live="polite"></div>
+        </div>
+        <div class="footer">
+          <button id="resetBtn" class="btn ghost">Reset</button>
+          <div style="display:flex; gap:10px; align-items:center">
+            <span class="meta" id="hint">${answered ? "Chọn đáp án để xem giải thích" : ""}</span>
+            <button id="nextBtn" class="btn" disabled>Tiếp theo</button>
+          </div>
+        </div>
+      `;
+
+      answered = false;
+      bindHandlers();
+      setProgress();
+    }
+
+    function bindHandlers() {
+      const q = quizData[order[current]];
+      const list = stage.querySelectorAll(".option");
+      const explainBox = stage.querySelector("#explain");
+      const nextBtn = stage.querySelector("#nextBtn");
+      const resetBtn = stage.querySelector("#resetBtn");
+
+      list.forEach(el => {
+        const idx = Number(el.getAttribute("data-index"));
+        const select = () => {
+          if (answered) return;
+          answered = true;
+
+          list.forEach(n => n.classList.remove("selected"));
+          el.classList.add("selected");
+
+          const isCorrect = idx === q.correctIndex;
+          if (isCorrect) {
+            el.classList.add("correct");
+            score += 1;
+          } else {
+            el.classList.add("incorrect");
+            const correctEl = Array.from(list)[q.correctIndex];
+            correctEl.classList.add("correct");
+          }
+
+          const label = isCorrect ? "Chính xác!" : "Chưa chính xác";
+          const cls = isCorrect ? "success" : "error";
+          const exampleBlock = q.example ? `<pre><code>${escapeHtml(q.example)}</code></pre>` : "";
+
+          explainBox.className = `explain show ${cls}`;
+          explainBox.innerHTML = `<div class="label">${label}</div><div>${escapeHtml(q.explanation)}</div>${exampleBlock}`;
+
+          nextBtn.disabled = false;
+        };
+
+        el.addEventListener("click", select);
+        el.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            select();
+          }
+        });
+      });
+
+      nextBtn.addEventListener("click", nextStep);
+      resetBtn.addEventListener("click", resetQuiz);
+    }
+
+    function nextStep() {
+      if (current < order.length - 1) {
+        current += 1;
+        renderQuestion();
+      } else {
+        showSummary();
+      }
+    }
+
+    function showSummary() {
+      progressBar.style.width = "100%";
+      metaProgress.textContent = `${order.length}/${order.length}`;
+
+      stage.innerHTML = `
+        <div class="summary">
+          <div class="score">${score}/${order.length}</div>
+          <div class="grid">
+            <div class="pill">Đúng: <strong style="color: var(--green)">${score}</strong></div>
+            <div class="pill">Sai: <strong style="color: var(--red)">${order.length - score}</strong></div>
+          </div>
+          <div class="meta">Hoàn thành quiz về HTML Forms. Bạn có thể làm lại để luyện tập thêm.</div>
+          <div style="display:flex; justify-content:center; gap:12px; margin-top: 4px;">
+            <button class="btn" id="again">Làm lại</button>
+          </div>
+        </div>
+      `;
+
+      const again = document.getElementById("again");
+      again.addEventListener("click", resetQuiz);
+    }
+
+    function resetQuiz() {
+      order = shuffle(quizData.map((_, i) => i));
+      current = 0;
+      score = 0;
+      answered = false;
+      renderQuestion();
+    }
+
+    // init
+    resetQuiz();
+  </script>
+</body>
+
+</html>
