@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Title is important for search engines and browser tabs -->
+  <title>Basic Webpage with Signup Form</title>
+</head>
+
+<body>
+
+  <!-- 
+        1. HEADER: Contains introductory content, usually the site's logo and primary navigation.
+    -->
+  <header>
+    <h1>Welcome to the Structural Webpage Exercise</h1>
+    <p>This page uses semantic HTML5 tags without any CSS or JavaScript.</p>
+  </header>
+
+  <!-- 
+        2. NAVIGATION BAR: Contains navigation links for the site.
+    -->
+  <nav>
+    <!-- Unordered list is the standard way to create a navigation menu -->
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- 
+        3. MAIN CONTENT: Contains the dominant content of the document.
+        There should only be one <main> element per document.
+    -->
+  <main>
+    <!-- Article/Section for main text content -->
+    <section id="main-content">
+      <h2>Primary Content Area</h2>
+      <p>This section is for the main, unique content of the page, demonstrating the importance of the &lt;main&gt; tag.
+      </p>
+      <p>We are using paragraph tags to structure text content logically. Since there is no CSS, the browser's default
+        styling (line breaks between paragraphs) is applied.</p>
+      <p>All structural elements are present: Header, Nav, Main, Sidebar (Aside), and Footer.</p>
+    </section>
+
+    <!-- 
+            4. SIDEBAR (ASIDE): Contains content tangentially related to the content around it.
+            It's often used for side notes, advertisements, or navigation.
+        -->
+    <aside>
+      <h3>Sidebar Content</h3>
+      <p>This is related information, but not essential to the primary topic.</p>
+
+      <!-- 
+                5. SIGNUP FORM: A simple form structure.
+                Since we can't use script, the form will not actually submit anywhere 
+                or validate anything dynamically.
+            -->
+      <section>
+        <h4>Sign Up Form</h4>
+        <form action="/submit-signup" method="post">
+          <!-- Text Input for Name -->
+          <label for="name">Full Name:</label><br>
+          <input type="text" id="name" name="fullname" required><br><br>
+
+          <!-- Email Input -->
+          <label for="email">Email Address:</label><br>
+          <input type="email" id="email" name="emailaddress" required><br><br>
+
+          <!-- Password Input -->
+          <label for="password">Password:</label><br>
+          <input type="password" id="password" name="password" required><br><br>
+
+          <!-- Submit Button -->
+          <input type="submit" value="Register Now">
+        </form>
+      </section>
+    </aside>
+  </main>
+
+  <!-- 
+        6. FOOTER: Contains information about the author, copyright data, links to related documents, etc.
+    -->
+  <footer>
+    <p>&copy; 2025 Structural Webpage Exercise. All Rights Reserved.</p>
+    <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+  </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Title is important for search engines and browser tabs -->
+  <title>Basic Webpage with List of Articles</title>
+</head>
+
+<body>
+
+  <!-- 
+        1. HEADER: Contains introductory content, usually the site's logo and primary navigation.
+    -->
+  <header>
+    <h1>Welcome to the Structural Webpage Exercise</h1>
+    <p>This page uses semantic HTML5 tags without any CSS or JavaScript.</p>
+  </header>
+
+  <!-- 
+        2. NAVIGATION BAR: Contains navigation links for the site.
+    -->
+  <nav>
+    <!-- Unordered list is the standard way to create a navigation menu -->
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#articles">Articles</a></li>
+      <li><a href="#archive">Archive</a></li>
+      <li><a href="#signup">Sign Up</a></li>
+    </ul>
+  </nav>
+
+  <!-- 
+        3. MAIN CONTENT: Contains the dominant content of the document.
+        This section now holds the list of articles.
+    -->
+  <main>
+    <!-- Section for the list of articles -->
+    <section id="articles">
+      <h2>Latest Articles</h2>
+
+      <!-- Article 1: Demonstrates structure with metadata -->
+      <article>
+        <header>
+          <h3>The Importance of Semantic Tags in HTML5</h3>
+        </header>
+        <p>A deep dive into the purpose and proper usage of modern HTML elements like &lt;article&gt;, &lt;section&gt;,
+          and &lt;aside&gt; for better accessibility and search engine optimization.</p>
+        <footer>
+          <p>
+            Author:
+          <address>Jane Doe</address> |
+          Published: <time datetime="2025-11-20">November 20, 2025</time>
+          </p>
+          <!-- Read More Button/Link -->
+          <p><a href="#article-1-full">Read More &raquo;</a></p>
+        </footer>
+      </article>
+
+      <!-- Horizontal Rule acts as a simple visual separator -->
+      <hr>
+
+      <!-- Article 2 -->
+      <article>
+        <header>
+          <h3>Pure HTML: The Unstyled Foundation of the Web</h3>
+        </header>
+        <p>Understanding how a browser renders a pure HTML document is the foundation of front-end development. This
+          article reviews the default document flow and typography.</p>
+        <footer>
+          <p>
+            Author:
+          <address>John Smith</address> |
+          Created At: <time datetime="2025-11-15T14:30">November 15, 2025, 2:30 PM</time>
+          </p>
+          <p><a href="#article-2-full">Read More &raquo;</a></p>
+        </footer>
+      </article>
+
+      <hr>
+
+      <!-- Article 3 -->
+      <article>
+        <header>
+          <h3>Tips for Accessible Form Design</h3>
+        </header>
+        <p>A quick guide to using &lt;label&gt; tags, `for` attributes, and `required` attributes to ensure forms are
+          usable by everyone, regardless of their assistive technology.</p>
+        <footer>
+          <p>
+            Author:
+          <address>Jane Doe</address> |
+          Created At: <time datetime="2025-11-10">November 10, 2025</time>
+          </p>
+          <p><a href="#article-3-full">Read More &raquo;</a></p>
+        </footer>
+      </article>
+
+    </section>
+
+  </main>
+
+  <!-- 
+        6. FOOTER: Contains information about the author, copyright data, links to related documents, etc.
+    -->
+  <footer>
+    <p>&copy; 2025 Structural Webpage Exercise. All Rights Reserved.</p>
+    <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+  </footer>
+
+</body>
+
+</html>
