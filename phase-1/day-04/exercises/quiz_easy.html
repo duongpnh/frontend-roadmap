@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Form Quiz</title>
+  <link rel="stylesheet" href="../../../styles.css">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #111834;
+      --text: #e6eaf2;
+      --muted: #9aa3b2;
+      --primary: #4f46e5;
+      --primary-600: #4338ca;
+      --green: #16a34a;
+      --red: #dc2626;
+      --yellow: #f59e0b;
+      --border: #1f2a4a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 80% -20%, #1c2350 0%, rgba(28, 35, 80, 0) 60%), radial-gradient(1000px 700px at -10% 110%, #1d274b 0%, rgba(29, 39, 75, 0) 60%), var(--bg);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .quiz-shell {
+      width: 100%;
+      max-width: 860px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .title {
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+    }
+
+    .title .badge {
+      font-size: 12px;
+      color: var(--yellow);
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .progress {
+      position: relative;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress>span {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), #22c55e);
+      transition: width 360ms ease;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      transform-origin: 50% 40%;
+      animation: cardIn 420ms cubic-bezier(.2, .8, .2, 1);
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.985);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .card-body {
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .q-head {
+      display: grid;
+      gap: 8px;
+    }
+
+    .q-index {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: .3px;
+    }
+
+    .q-text {
+      font-size: 20px;
+      line-height: 1.45;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+      user-select: none;
+    }
+
+    .option:hover {
+      transform: translateY(-1px);
+      border-color: rgba(79, 70, 229, 0.55);
+      background: rgba(79, 70, 229, 0.08);
+    }
+
+    .option.selected {
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    .option.correct {
+      border-color: rgba(34, 197, 94, 0.7);
+      background: rgba(34, 197, 94, 0.08);
+    }
+
+    .option.incorrect {
+      border-color: rgba(220, 38, 38, 0.7);
+      background: rgba(220, 38, 38, 0.06);
+    }
+
+    .option .letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      flex: 0 0 auto;
+    }
+
+    .explain {
+      display: none;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      animation: fadeIn 300ms ease;
+    }
+
+    .explain.show {
+      display: block;
+    }
+
+    .explain.success {
+      border-color: rgba(22, 163, 74, 0.6);
+      background: rgba(22, 163, 74, 0.08);
+    }
+
+    .explain.error {
+      border-color: rgba(220, 38, 38, 0.6);
+      background: rgba(220, 38, 38, 0.08);
+    }
+
+    .explain .label {
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .explain.success .label {
+      color: var(--green);
+    }
+
+    .explain.error .label {
+      color: var(--red);
+    }
+
+    .explain pre {
+      margin: 10px 0 0;
+      padding: 12px;
+      background: #0d1228;
+      color: #e7ecf7;
+      border: 1px solid #263156;
+      border-radius: 10px;
+      overflow: auto;
+      max-height: 260px;
+    }
+
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 24px 24px;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: var(--primary);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform 120ms ease, background 120ms ease, opacity 120ms ease;
+    }
+
+    .btn:hover {
+      background: var(--primary-600);
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .meta {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Summary styles */
+    .summary {
+      display: grid;
+      gap: 14px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .score {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      background: linear-gradient(90deg, #22c55e, #4f46e5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    @media (max-width: 720px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="quiz-shell">
+    <div class="header">
+      <div class="title">
+        <span>HTML Form Quiz</span>
+        <span class="badge">15 questions</span>
+      </div>
+      <div class="meta"><span id="meta-progress">0/15</span></div>
+    </div>
+
+    <div class="progress"><span id="progress-bar"></span></div>
+
+    <section id="stage" class="card" aria-live="polite"></section>
+  </div>
+
+  <script>
+    const LETTERS = ["A", "B", "C", "D"];
+
+    const quizData = [
+      {
+        "q": "Thẻ HTML nào là quan trọng nhất để xác định tiêu đề trang web và hiển thị trên kết quả tìm kiếm (SERP)?",
+        "options": [
+          "<body>",
+          "<hr>",
+          "<title>",
+          "<h3>"
+        ],
+        "correctIndex": 2,
+        "explanation": "Thẻ <title> nằm trong phần <head> và là yếu tố quan trọng nhất để công cụ tìm kiếm hiểu nội dung chính của trang và hiển thị làm tiêu đề (title link) trên kết quả tìm kiếm (SERP). Thẻ <h3> là tiêu đề phụ, <body> là nội dung, <hr> là đường kẻ ngang."
+      },
+      {
+        "q": "Thuộc tính nào của thẻ <img> được dùng để cung cấp mô tả văn bản thay thế cho hình ảnh, giúp công cụ tìm kiếm hiểu nội dung ảnh?",
+        "options": [
+          "src",
+          "name",
+          "title",
+          "alt"
+        ],
+        "correctIndex": 3,
+        "explanation": "Thuộc tính 'alt' (alternative text) là rất quan trọng cho SEO hình ảnh và trợ năng. Nó cung cấp mô tả văn bản cho công cụ tìm kiếm và người dùng khi ảnh không hiển thị. 'src' là đường dẫn ảnh, 'title' là tooltip, 'name' ít dùng cho ảnh."
+      },
+      {
+        "q": "Thẻ meta nào được sử dụng để tóm tắt nội dung trang web, thường được hiển thị dưới tiêu đề trang trên SERP?",
+        "options": [
+          "<meta name='keywords'>",
+          "<meta name='description'>",
+          "<meta charset='UTF-8'>",
+          "<meta name='author'>"
+        ],
+        "correctIndex": 1,
+        "explanation": "Thẻ meta description cung cấp một đoạn tóm tắt ngắn gọn về nội dung trang. Mặc dù không phải yếu tố xếp hạng trực tiếp, nó ảnh hưởng lớn đến tỷ lệ nhấp (CTR) từ kết quả tìm kiếm. Các thẻ còn lại không có chức năng mô tả trang."
+      },
+      {
+        "q": "Công cụ tìm kiếm sử dụng thẻ nào để xác định các tiêu đề và tiêu đề phụ quan trọng trong cấu trúc nội dung trang web?",
+        "options": [
+          "Thẻ tiêu đề từ <h1> đến <h6>",
+          "Thẻ đoạn văn bản <p>",
+          "Thẻ in đậm <b>",
+          "Thẻ chân trang <footer>"
+        ],
+        "correctIndex": 0,
+        "explanation": "Các thẻ tiêu đề (<h1> đến <h6>) thiết lập hệ thống phân cấp và cấu trúc nội dung. Thẻ <h1> nên dùng cho tiêu đề chính, các thẻ tiếp theo cho tiêu đề phụ, giúp công cụ tìm kiếm hiểu được chủ đề và các phần quan trọng của trang."
+      },
+      {
+        "q": "Để ngăn chặn Googlebot và các bot khác truy cập và lập chỉ mục một trang cụ thể, bạn nên thêm thẻ meta nào vào phần <head>?",
+        "options": [
+          "<meta name='robots' content='index, follow'>",
+          "<meta name='googlebot' content='not-allow'>",
+          "<meta name='description' content='hidden'>",
+          "<meta name='robots' content='noindex, follow'>"
+        ],
+        "correctIndex": 3,
+        "explanation": "Thuộc tính 'noindex' trong thẻ meta robots yêu cầu công cụ tìm kiếm không lập chỉ mục trang đó, ngăn nó xuất hiện trên kết quả tìm kiếm. Thuộc tính 'follow' vẫn cho phép bot đi theo các liên kết trên trang."
+      },
+      {
+        "q": "Thẻ HTML nào được xem là tiêu đề chính, quan trọng nhất của một trang web?",
+        "options": [
+          "<p>",
+          "<footer>",
+          "<h2>",
+          "<h1>"
+        ],
+        "correctIndex": 3,
+        "explanation": "Thẻ <h1> đánh dấu tiêu đề quan trọng nhất, thường chỉ nên có một lần trên mỗi trang để công cụ tìm kiếm hiểu rõ chủ đề chính."
+      },
+      {
+        "q": "Thẻ HTML nào nên được sử dụng cho một liên kết bên ngoài (outbound link) để công cụ tìm kiếm không truyền 'PageRank' (tín hiệu xếp hạng)?",
+        "options": [
+          "<a rel=\"external\">",
+          "<a rel=\"internal\">",
+          "<a rel=\"nofollow\">",
+          "<a rel=\"dofollow\">"
+        ],
+        "correctIndex": 2,
+        "explanation": "Thuộc tính `rel=\"nofollow\"` yêu cầu bot không đi theo liên kết và không chuyển giá trị SEO. Đây là cách chuẩn để đánh dấu các liên kết mà bạn không muốn ủng hộ về mặt xếp hạng."
+      },
+      {
+        "q": "Vị trí nào trong tài liệu HTML mà công cụ tìm kiếm chú trọng nhất khi xác định các từ khóa quan trọng của trang?",
+        "options": [
+          "Thẻ <footer>",
+          "Thẻ <title>",
+          "Thẻ <br>",
+          "Thẻ <table>"
+        ],
+        "correctIndex": 1,
+        "explanation": "Thẻ <title> là một trong những yếu tố xếp hạng quan trọng nhất. Từ khóa xuất hiện trong tiêu đề sẽ có tác động lớn đến sự liên quan của trang."
+      },
+      {
+        "q": "Thẻ HTML nào được sử dụng để hiển thị một đoạn mã (code block) trong tài liệu HTML một cách ngữ nghĩa?",
+        "options": [
+          "<span>",
+          "<p>",
+          "<div>",
+          "<pre> và <code>"
+        ],
+        "correctIndex": 3,
+        "explanation": "Kết hợp `<pre>` (preformatted text - định dạng trước) và `<code>` là tốt nhất để đánh dấu khối mã lập trình, giúp bot hiểu đó là mã và hiển thị đúng định dạng."
+      },
+      {
+        "q": "Khi liên kết đến một trang khác trên cùng một website, bạn nên sử dụng liên kết loại nào?",
+        "options": [
+          "Liên kết bên ngoài (External Link)",
+          "Liên kết trả phí (Sponsored Link)",
+          "Liên kết nội bộ (Internal Link)",
+          "Liên kết không theo dõi (Nofollow Link)"
+        ],
+        "correctIndex": 2,
+        "explanation": "Liên kết nội bộ giúp công cụ tìm kiếm khám phá và phân phối giá trị giữa các trang (PageRank), củng cố cấu trúc website."
+      },
+      {
+        "q": "Thẻ <meta> nào thường bị Google bỏ qua từ năm 2009 do bị lạm dụng?",
+        "options": [
+          "name=\"keywords\"",
+          "name=\"description\"",
+          "charset=\"UTF-8\"",
+          "viewport"
+        ],
+        "correctIndex": 0,
+        "explanation": "Google xác nhận đã ngừng sử dụng thẻ meta keywords trong thuật toán xếp hạng do bị spam từ khóa quá mức."
+      },
+      {
+        "q": "Để tối ưu tốc độ tải trang trên di động, thẻ meta nào là cần thiết để kiểm soát kích thước và tỷ lệ trình duyệt?",
+        "options": [
+          "<meta name=\"robots\">",
+          "<meta name=\"generator\">",
+          "<meta name=\"author\">",
+          "<meta name=\"viewport\">"
+        ],
+        "correctIndex": 3,
+        "explanation": "Thẻ `viewport` là cực kỳ quan trọng cho Responsive Web Design (thiết kế đáp ứng) và trải nghiệm di động, một yếu tố xếp hạng quan trọng."
+      },
+      {
+        "q": "Thẻ HTML nào được sử dụng để tạo một danh sách không có thứ tự (bullet points), hữu ích cho việc liệt kê các điểm chính trong SEO?",
+        "options": [
+          "<ol>",
+          "<ul>",
+          "<li>",
+          "<dl>"
+        ],
+        "correctIndex": 1,
+        "explanation": "Thẻ `<ul>` (unordered list) tạo danh sách bằng dấu chấm. Thẻ `<li>` là phần tử danh sách, còn `<ol>` tạo danh sách có thứ tự (số)."
+      },
+      {
+        "q": "Thẻ HTML nào thích hợp nhất để bọc nội dung chính, duy nhất của trang web, trừ header, footer, sidebar?",
+        "options": [
+          "<main>",
+          "<div>",
+          "<span>",
+          "<section>"
+        ],
+        "correctIndex": 0,
+        "explanation": "Thẻ `<main>` có ngữ nghĩa cao (semantic) chỉ ra nội dung chính, độc lập của tài liệu, giúp bot tập trung vào nội dung quan trọng nhất."
+      },
+      {
+        "q": "Tệp nào cung cấp 'bản đồ' của tất cả các trang quan trọng trên website của bạn cho công cụ tìm kiếm?",
+        "options": [
+          "robots.txt",
+          ".htaccess",
+          "sitemap.xml",
+          "config.json"
+        ],
+        "correctIndex": 2,
+        "explanation": "Sitemap XML giúp công cụ tìm kiếm hiểu và thu thập dữ liệu (crawl) các trang mới/quan trọng hiệu quả hơn, đặc biệt quan trọng cho các trang lớn hoặc mới."
+      }
+    ];
+
+    const stage = document.getElementById("stage");
+    const progressBar = document.getElementById("progress-bar");
+    const metaProgress = document.getElementById("meta-progress");
+
+    let order = [];
+    let current = 0;
+    let score = 0;
+    let answered = false;
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function escapeHtml(str) {
+      return str.replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+    }
+
+    function setProgress() {
+      metaProgress.textContent = `${Math.min(current + 1, order.length)}/${order.length}`;
+      const pct = (current) / order.length * 100;
+      progressBar.style.width = `${pct}%`;
+    }
+
+    function renderQuestion() {
+      const q = quizData[order[current]];
+
+      const options = q.options.map((text, i) => {
+        return `<div class="option" data-index="${i}" role="button" tabindex="0" aria-pressed="false">
+  <div class="letter">${LETTERS[i]}</div>
+  <div>${escapeHtml(text)}</div>
+</div>`;
+      }).join("");
+
+      stage.innerHTML = `
+        <div class="card-body">
+          <div class="q-head">
+            <div class="q-index">Câu ${current + 1}/${order.length}</div>
+            <div class="q-text">${escapeHtml(q.q)}</div>
+          </div>
+          <div class="options" id="options">${options}</div>
+          <div id="explain" class="explain" aria-live="polite"></div>
+        </div>
+        <div class="footer">
+          <button id="resetBtn" class="btn ghost">Reset</button>
+          <div style="display:flex; gap:10px; align-items:center">
+            <span class="meta" id="hint">${answered ? "Chọn đáp án để xem giải thích" : ""}</span>
+            <button id="nextBtn" class="btn" disabled>Tiếp theo</button>
+          </div>
+        </div>
+      `;
+
+      answered = false;
+      bindHandlers();
+      setProgress();
+    }
+
+    function bindHandlers() {
+      const q = quizData[order[current]];
+      const list = stage.querySelectorAll(".option");
+      const explainBox = stage.querySelector("#explain");
+      const nextBtn = stage.querySelector("#nextBtn");
+      const resetBtn = stage.querySelector("#resetBtn");
+
+      list.forEach(el => {
+        const idx = Number(el.getAttribute("data-index"));
+        const select = () => {
+          if (answered) return;
+          answered = true;
+
+          list.forEach(n => n.classList.remove("selected"));
+          el.classList.add("selected");
+
+          const isCorrect = idx === q.correctIndex;
+          if (isCorrect) {
+            el.classList.add("correct");
+            score += 1;
+          } else {
+            el.classList.add("incorrect");
+            const correctEl = Array.from(list)[q.correctIndex];
+            correctEl.classList.add("correct");
+          }
+
+          const label = isCorrect ? "Chính xác!" : "Chưa chính xác";
+          const cls = isCorrect ? "success" : "error";
+          const exampleBlock = q.example ? `<pre><code>${escapeHtml(q.example)}</code></pre>` : "";
+
+          explainBox.className = `explain show ${cls}`;
+          explainBox.innerHTML = `<div class="label">${label}</div><div>${escapeHtml(q.explanation)}</div>${exampleBlock}`;
+
+          nextBtn.disabled = false;
+        };
+
+        el.addEventListener("click", select);
+        el.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            select();
+          }
+        });
+      });
+
+      nextBtn.addEventListener("click", nextStep);
+      resetBtn.addEventListener("click", resetQuiz);
+    }
+
+    function nextStep() {
+      if (current < order.length - 1) {
+        current += 1;
+        renderQuestion();
+      } else {
+        showSummary();
+      }
+    }
+
+    function showSummary() {
+      progressBar.style.width = "100%";
+      metaProgress.textContent = `${order.length}/${order.length}`;
+
+      stage.innerHTML = `
+        <div class="summary">
+          <div class="score">${score}/${order.length}</div>
+          <div class="grid">
+            <div class="pill">Đúng: <strong style="color: var(--green)">${score}</strong></div>
+            <div class="pill">Sai: <strong style="color: var(--red)">${order.length - score}</strong></div>
+          </div>
+          <div class="meta">Hoàn thành quiz về HTML Forms. Bạn có thể làm lại để luyện tập thêm.</div>
+          <div style="display:flex; justify-content:center; gap:12px; margin-top: 4px;">
+            <button class="btn" id="again">Làm lại</button>
+          </div>
+        </div>
+      `;
+
+      const again = document.getElementById("again");
+      again.addEventListener("click", resetQuiz);
+    }
+
+    function resetQuiz() {
+      order = shuffle(quizData.map((_, i) => i));
+      current = 0;
+      score = 0;
+      answered = false;
+      renderQuestion();
+    }
+
+    // init
+    resetQuiz();
+  </script>
+</body>
+
+</html>
