@@ -22,7 +22,50 @@
 	</header>
 
 	<main class="container">
-
+    <section class="section">
+      <h2>Step-by-Step GitHub Project Setup</h2>
+      <ol>
+        <li><strong>Create a New Repository</strong> on GitHub (do not initialize with a README).</li>
+        <li><strong>Generate SSH Keys</strong> and add the public key to your GitHub account for secure access.</li>
+        <li><strong>Initialize Git</strong> in your local project root folder:
+          <ul>
+            <li><code>git init</code></li>
+          </ul>
+        </li>
+        <li><strong>[Optional/First Time Only] Configure Local Identity</strong> for this project (otherwise, use global
+          settings):
+          <ul>
+            <li><code>git config --local user.name "Your Name"</code></li>
+            <li><code>git config --local user.email "your.email@example.com"</code></li>
+          </ul>
+        </li>
+        <li><strong>Connect Local Repo to GitHub</strong> (using the secure SSH URL):
+          <ul>
+            <li><code>git remote add origin git@github.com:USERNAME/REPO-NAME.git</code></li>
+          </ul>
+        </li>
+        <li><strong>Add all file changes</strong> to the staging area:
+          <ul>
+            <li><code>git add .</code></li>
+          </ul>
+        </li>
+        <li><strong>Commit your changes</strong> with a meaningful message:
+          <ul>
+            <li><code>git commit -m "Initial commit"</code></li>
+          </ul>
+        </li>
+        <li><strong>Rename/Create the 'main' branch</strong> (if necessary, or if you prefer a different name):
+          <ul>
+            <li><code>git branch -M main</code></li>
+          </ul>
+        </li>
+        <li><strong>Push your change</strong> to the remote repository and set the upstream branch:
+          <ul>
+            <li><code>git push -u origin main</code></li>
+          </ul>
+        </li>
+      </ol>
+    </section>
 		<section id="phase-1" class="section">
       <h2>Phase 1 — Website Foundations</h2>
       <p>HTML semantics, forms, tables, basic SEO · CSS selectors, box model, Flexbox, Grid, responsive · Git/GitHub · Deployment</p>
