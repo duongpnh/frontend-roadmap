@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Selectors & Cascade (Hard)</title>
+  <style>
+    /* ... (CSS Styles from original file) ... */
+    :root {
+      --bg: #0b1020;
+      --card: #111834;
+      --text: #e6eaf2;
+      --muted: #9aa3b2;
+      --primary: #4f46e5;
+      --primary-600: #4338ca;
+      --green: #16a34a;
+      --red: #dc2626;
+      --yellow: #f59e0b;
+      --border: #1f2a4a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 80% -20%, #1c2350 0%, rgba(28, 35, 80, 0) 60%), radial-gradient(1000px 700px at -10% 110%, #1d274b 0%, rgba(29, 39, 75, 0) 60%), var(--bg);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .quiz-shell {
+      width: 100%;
+      max-width: 860px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .title {
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+    }
+
+    .title .badge {
+      font-size: 12px;
+      color: var(--yellow);
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .progress {
+      position: relative;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress>span {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), #22c55e);
+      transition: width 360ms ease;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      transform-origin: 50% 40%;
+      animation: cardIn 420ms cubic-bezier(.2, .8, .2, 1);
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.985);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .card-body {
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .q-head {
+      display: grid;
+      gap: 8px;
+    }
+
+    .q-index {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: .3px;
+    }
+
+    .q-text {
+      font-size: 20px;
+      line-height: 1.45;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+      user-select: none;
+    }
+
+    .option:hover {
+      transform: translateY(-1px);
+      border-color: rgba(79, 70, 229, 0.55);
+      background: rgba(79, 70, 229, 0.08);
+    }
+
+    .option.selected {
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    .option.correct {
+      border-color: rgba(34, 197, 94, 0.7);
+      background: rgba(34, 197, 94, 0.08);
+    }
+
+    .option.incorrect {
+      border-color: rgba(220, 38, 38, 0.7);
+      background: rgba(220, 38, 38, 0.06);
+    }
+
+    .option .letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      flex: 0 0 auto;
+    }
+
+    .explain {
+      display: none;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      animation: fadeIn 300ms ease;
+    }
+
+    .explain.show {
+      display: block;
+    }
+
+    .explain.success {
+      border-color: rgba(22, 163, 74, 0.6);
+      background: rgba(22, 163, 74, 0.08);
+    }
+
+    .explain.error {
+      border-color: rgba(220, 38, 38, 0.6);
+      background: rgba(220, 38, 38, 0.08);
+    }
+
+    .explain .label {
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .explain.success .label {
+      color: var(--green);
+    }
+
+    .explain.error .label {
+      color: var(--red);
+    }
+
+    .explain pre {
+      margin: 10px 0 0;
+      padding: 12px;
+      background: #0d1228;
+      color: #e7ecf7;
+      border: 1px solid #263156;
+      border-radius: 10px;
+      overflow: auto;
+      max-height: 260px;
+    }
+
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 24px 24px;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: var(--primary);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform 120ms ease, background 120ms ease, opacity 120ms ease;
+    }
+
+    .btn:hover {
+      background: var(--primary-600);
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .meta {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Summary styles */
+    .summary {
+      display: grid;
+      gap: 14px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .score {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      background: linear-gradient(90deg, #22c55e, #4f46e5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    @media (max-width: 720px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="quiz-shell">
+    <div class="header">
+      <div class="title">
+        <span>CSS Selectors & Cascade (Hard)</span>
+        <span class="badge">15 questions</span>
+      </div>
+      <div class="meta"><span id="meta-progress">0/15</span></div>
+    </div>
+
+    <div class="progress"><span id="progress-bar"></span></div>
+
+    <section id="stage" class="card" aria-live="polite"></section>
+  </div>
+
+  <script>
+    const LETTERS = ["A", "B", "C", "D"];
+
+    const quizData = [
+      {
+        q: "Tính độ đặc hiệu (Specificity Score) của bộ chọn sau: `body > #content ul:not(.menu) li`",
+        options: [
+          "(1, 1, 2, 0)",
+          "(1, 2, 2, 0)",
+          "(1, 1, 3, 0)",
+          "(2, 1, 1, 0)"
+        ],
+        correctIndex: 2,
+        explanation: "Điểm: 1 ID (#content) + 1 Class (từ .menu bên trong :not) + 3 Elements (body, ul, li) = (1, 1, 3, 0). Pseudo-class `:not()` không thêm điểm, mà lấy điểm của bộ chọn phức tạp nhất bên trong nó."
+      },
+      {
+        q: "Bộ chọn General Sibling (`~`) khác Bộ chọn Adjacent Sibling (`+`) ở điểm nào?",
+        options: [
+          "`~` chọn các phần tử anh em bất kỳ nằm sau, còn `+` chỉ chọn phần tử *kế tiếp* ngay sau.",
+          "`+` chọn con trực tiếp, còn `~` chọn hậu duệ.",
+          "`~` có độ đặc hiệu cao hơn.",
+          "Cả hai đều giống nhau, chỉ là cách viết khác."
+        ],
+        correctIndex: 0,
+        explanation: "General Sibling Selector (~) chọn tất cả các phần tử anh em (sibling) nằm sau phần tử đầu tiên. Adjacent Sibling Selector (+) chỉ chọn phần tử anh em đầu tiên nằm ngay sau."
+      },
+      {
+        q: "Trong quy trình Cascade, nếu có một quy tắc CSS từ **Author** (Tác giả) và một quy tắc khác từ **User** (Người dùng), quy tắc nào thường có ưu tiên cao hơn?",
+        options: [
+          "Quy tắc của Tác giả",
+          "Quy tắc của Người dùng",
+          "Quy tắc có độ đặc hiệu cao hơn",
+          "Quy tắc được viết sau cùng"
+        ],
+        correctIndex: 0,
+        explanation: "Thứ tự Origin mặc định là: User Agent < User < Author. Do đó, CSS của Tác giả (mà bạn viết) thường có ưu tiên cao hơn CSS của Người dùng (thiết lập trình duyệt)."
+      },
+      {
+        q: "Bộ chọn `:target` có tác dụng gì trong CSS?",
+        options: [
+          "Chọn phần tử là đích đến của một liên kết ngoại vi",
+          "Chọn phần tử con cuối cùng",
+          "Chọn phần tử mà người dùng đang click vào",
+          "Chọn phần tử có ID khớp với phần fragment (#) của URL hiện tại"
+        ],
+        correctIndex: 3,
+        explanation: "Pseudo-class `:target` chọn phần tử có ID được tham chiếu trong phần fragment của URL. Ví dụ: URL `...#section1` sẽ chọn `<div id=\"section1\">`."
+      },
+      {
+        q: "Bộ chọn thuộc tính `[href^=\"https\"]` sẽ chọn các phần tử có thuộc tính `href` như thế nào?",
+        options: [
+          "Kết thúc bằng \"https\"",
+          "Chứa chuỗi \"https\"",
+          "Bằng chính xác \"https\"",
+          "Bắt đầu bằng \"https\""
+        ],
+        correctIndex: 3,
+        explanation: "`^=` (Starts With) Selector chọn các giá trị thuộc tính bắt đầu bằng chuỗi được chỉ định. Ví dụ: `[href^=\"https:\"]`."
+      },
+      {
+        q: "Khi sử dụng `:not(.class-name)`, độ đặc hiệu của bộ chọn kết hợp này được tính như thế nào?",
+        options: [
+          "Độ đặc hiệu bằng 0",
+          "Nó bằng độ đặc hiệu của bộ chọn bên trong dấu ngoặc đơn (`.class-name`)",
+          "Nó bằng độ đặc hiệu của bộ chọn bên ngoài",
+          "Nó bằng độ đặc hiệu của bộ chọn bên trong cộng thêm 1 Class"
+        ],
+        correctIndex: 1,
+        explanation: "Pseudo-class `:not()` không tự thêm điểm đặc hiệu, mà lấy độ đặc hiệu của bộ chọn phức tạp nhất được truyền vào nó."
+      },
+      {
+        q: "Giả sử bạn có `div` chứa `p`, `span`, và `p`. Bộ chọn `div p:nth-child(2)` chọn những thẻ `p` nào?",
+        options: [
+          "Thẻ `p` thứ hai trong *tất cả* các thẻ `p` là con của `div`",
+          "Thẻ `p` là con thứ hai của `div` (nếu phần tử tại vị trí 2 là `p`)",
+          "Thẻ `p` là con thứ hai bất kể loại của `div`",
+          "Không chọn gì"
+        ],
+        correctIndex: 1,
+        explanation: "`:nth-child(2)` đếm vị trí thứ hai trong số *tất cả* các phần tử con. Nếu phần tử con thứ hai không phải là thẻ `p` thì không có gì được chọn. `p:nth-of-type(2)` mới chọn thẻ `p` thứ hai."
+      },
+      {
+        q: "Thuộc tính nào của phần tử con bị ảnh hưởng bởi khai báo `div { all: initial; }` ở phần tử cha?",
+        options: [
+          "Chỉ các thuộc tính được kế thừa",
+          "Chỉ các thuộc tính không được kế thừa",
+          "Tất cả các thuộc tính của phần tử `div` đó",
+          "Không ảnh hưởng đến phần tử con"
+        ],
+        correctIndex: 2,
+        explanation: "`all: initial;` reset tất cả các thuộc tính (kể cả thuộc tính không kế thừa) của phần tử *đó* (`div`) về giá trị mặc định, không trực tiếp ảnh hưởng đến phần tử con."
+      },
+      {
+        q: "Khi bạn dùng `::first-line`, bạn đang nhắm đến loại bộ chọn nào?",
+        options: [
+          "Pseudo-class",
+          "Pseudo-element",
+          "Attribute Selector",
+          "ID Selector"
+        ],
+        correctIndex: 1,
+        explanation: "Pseudo-element được dùng để tạo kiểu cho một phần của phần tử (ví dụ: dòng đầu tiên, ký tự đầu tiên). Pseudo-class được dùng để tạo kiểu dựa trên trạng thái của phần tử."
+      },
+      {
+        q: "Nếu bạn muốn một quy tắc CSS không thể bị ghi đè bởi bất kỳ CSS bên ngoài nào khác (trừ khi dùng `!important` khác), bạn nên khai báo nó dưới dạng nào?",
+        options: [
+          "Selector Class",
+          "Selector ID",
+          "CSS Inline",
+          "CSS External File"
+        ],
+        correctIndex: 2,
+        explanation: "CSS Inline (`style=\"...\"`) có độ đặc hiệu là (1,0,0,0), là điểm cao nhất có thể đạt được và có ưu tiên rất cao trong Cascade."
+      },
+      {
+        q: "Quy tắc CSS của trình duyệt (User Agent Styles) có thể bị ghi đè bởi quy tắc nào sau đây?",
+        options: [
+          "Chỉ quy tắc `!important` của người dùng",
+          "Chỉ quy tắc `!important` của tác giả",
+          "Bất kỳ quy tắc CSS nào của tác giả (nếu độ đặc hiệu lớn hơn 0)",
+          "Chỉ khi sử dụng JavaScript"
+        ],
+        correctIndex: 2,
+        explanation: "Theo Origin: User Agent Styles có ưu tiên thấp nhất. Bất kỳ CSS nào của Tác giả (Author Styles) đều ghi đè CSS mặc định của trình duyệt."
+      },
+      {
+        q: "Độ đặc hiệu của bộ chọn `:not([class])` là bao nhiêu?",
+        options: [
+          "(0, 0, 1, 0)",
+          "(0, 1, 0, 0)",
+          "(0, 0, 0, 0)",
+          "(1, 0, 0, 0)"
+        ],
+        correctIndex: 1,
+        explanation: "`:not()` lấy điểm độ đặc hiệu của bộ chọn bên trong nó. `[class]` là Attribute Selector, có điểm (0, 1, 0, 0). `:not` không tự thêm điểm nào."
+      },
+      {
+        q: "Nếu một thuộc tính được kế thừa từ phần tử cha và một quy tắc khác (nhưng có độ đặc hiệu thấp hơn) được áp dụng trực tiếp cho phần tử con, cái nào thắng?",
+        options: [
+          "Giá trị được kế thừa từ phần tử cha",
+          "Giá trị được áp dụng trực tiếp cho phần tử con",
+          "Tùy thuộc vào Source Order",
+          "Giá trị mặc định của trình duyệt"
+        ],
+        correctIndex: 1,
+        explanation: "Mọi giá trị được áp dụng *trực tiếp* cho một phần tử đều có ưu tiên cao hơn giá trị được *kế thừa* từ phần tử cha, bất kể độ đặc hiệu của quy tắc kế thừa là bao nhiêu."
+      },
+      {
+        q: "Điều gì xảy ra khi bạn dùng bộ chọn `p:empty`?",
+        options: [
+          "Chọn các thẻ `<p>` không có thuộc tính `class`",
+          "Chọn các thẻ `<p>` không có nội dung văn bản (và không có phần tử con)",
+          "Chọn các thẻ `<p>` có thuộc tính `content=\"\"`",
+          "Chọn các thẻ `<p>` không có thuộc tính `style`"
+        ],
+        correctIndex: 1,
+        explanation: "Pseudo-class `:empty` chọn phần tử không có con nào, kể cả các nút văn bản (text nodes) hoặc whitespace. Các phần tử con là Pseudo-elements (như `::before`) không được tính."
+      },
+      {
+        q: "Trong một CSS Stylesheet, hai quy tắc có cùng độ đặc hiệu và được khai báo lần lượt là Line 10 và Line 50. Quy tắc nào được áp dụng?",
+        options: [
+          "Quy tắc ở Line 10 (vì viết trước)",
+          "Quy tắc ở Line 50 (vì viết sau)",
+          "Cả hai bị hủy",
+          "Tùy thuộc vào độ dài của quy tắc"
+        ],
+        correctIndex: 1,
+        explanation: "Khi độ đặc hiệu (Specificity) bằng nhau, quy tắc được khai báo sau cùng (Source Order) sẽ được ưu tiên."
+      }
+    ];
+
+    const stage = document.getElementById("stage");
+    const progressBar = document.getElementById("progress-bar");
+    const metaProgress = document.getElementById("meta-progress");
+
+    let order = [];
+    let current = 0;
+    let score = 0;
+    let answered = false;
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function escapeHtml(str) {
+      return str.replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+    }
+
+    function setProgress() {
+      metaProgress.textContent = `${Math.min(current + 1, order.length)}/${order.length}`;
+      const pct = (current) / order.length * 100;
+      progressBar.style.width = `${pct}%`;
+    }
+
+    function renderQuestion() {
+      const q = quizData[order[current]];
+
+      const options = q.options.map((text, i) => {
+        return `<div class="option" data-index="${i}" role="button" tabindex="0" aria-pressed="false">
+  <div class="letter">${LETTERS[i]}</div>
+  <div>${escapeHtml(text)}</div>
+</div>`;
+      }).join("");
+
+      stage.innerHTML = `
+        <div class="card-body">
+          <div class="q-head">
+            <div class="q-index">Câu ${current + 1}/${order.length}</div>
+            <div class="q-text">${escapeHtml(q.q)}</div>
+          </div>
+          <div class="options" id="options">${options}</div>
+          <div id="explain" class="explain" aria-live="polite"></div>
+        </div>
+        <div class="footer">
+          <button id="resetBtn" class="btn ghost">Reset</button>
+          <div style="display:flex; gap:10px; align-items:center">
+            <span class="meta" id="hint">${answered ? "Chọn đáp án để xem giải thích" : ""}</span>
+            <button id="nextBtn" class="btn" disabled>Tiếp theo</button>
+          </div>
+        </div>
+      `;
+
+      answered = false;
+      bindHandlers();
+      setProgress();
+    }
+
+    function bindHandlers() {
+      const q = quizData[order[current]];
+      const list = stage.querySelectorAll(".option");
+      const explainBox = stage.querySelector("#explain");
+      const nextBtn = stage.querySelector("#nextBtn");
+      const resetBtn = stage.querySelector("#resetBtn");
+
+      list.forEach(el => {
+        const idx = Number(el.getAttribute("data-index"));
+        const select = () => {
+          if (answered) return;
+          answered = true;
+
+          list.forEach(n => n.classList.remove("selected"));
+          el.classList.add("selected");
+
+          const isCorrect = idx === q.correctIndex;
+          if (isCorrect) {
+            el.classList.add("correct");
+            score += 1;
+          } else {
+            el.classList.add("incorrect");
+            const correctEl = Array.from(list)[q.correctIndex];
+            correctEl.classList.add("correct");
+          }
+
+          const label = isCorrect ? "Chính xác!" : "Chưa chính xác";
+          const cls = isCorrect ? "success" : "error";
+          const exampleBlock = q.example ? `<pre><code>${escapeHtml(q.example)}</code></pre>` : "";
+
+          explainBox.className = `explain show ${cls}`;
+          explainBox.innerHTML = `<div class="label">${label}</div><div>${escapeHtml(q.explanation)}</div>${exampleBlock}`;
+
+          nextBtn.disabled = false;
+        };
+
+        el.addEventListener("click", select);
+        el.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            select();
+          }
+        });
+      });
+
+      nextBtn.addEventListener("click", nextStep);
+      resetBtn.addEventListener("click", resetQuiz);
+    }
+
+    function nextStep() {
+      if (current < order.length - 1) {
+        current += 1;
+        renderQuestion();
+      } else {
+        showSummary();
+      }
+    }
+
+    function showSummary() {
+      progressBar.style.width = "100%";
+      metaProgress.textContent = `${order.length}/${order.length}`;
+
+      stage.innerHTML = `
+        <div class="summary">
+          <div class="score">${score}/${order.length}</div>
+          <div class="grid">
+            <div class="pill">Đúng: <strong style="color: var(--green)">${score}</strong></div>
+            <div class="pill">Sai: <strong style="color: var(--red)">${order.length - score}</strong></div>
+          </div>
+          <div class="meta">Hoàn thành quiz về CSS Selectors & Cascade. Bạn có thể làm lại để luyện tập thêm.</div>
+          <div style="display:flex; justify-content:center; gap:12px; margin-top: 4px;">
+            <button class="btn" id="again">Làm lại</button>
+          </div>
+        </div>
+      `;
+
+      const again = document.getElementById("again");
+      again.addEventListener("click", resetQuiz);
+    }
+
+    function resetQuiz() {
+      order = shuffle(quizData.map((_, i) => i));
+      current = 0;
+      score = 0;
+      answered = false;
+      renderQuestion();
+    }
+
+    // init
+    resetQuiz();
+  </script>
+</body>
+
+</html>

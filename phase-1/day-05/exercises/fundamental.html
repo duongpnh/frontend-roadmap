@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Giải thích chi tiết về CSS Selectors (Bộ chọn) và Cascade (Thứ tự ưu tiên) trong phát triển web.">
+  <meta name="keywords" content="CSS, Selectors, Cascade, Specificity, Độ đặc hiệu, ưu tiên CSS">
+  <meta name="author" content="AI Assistant">
+  <title>CSS: Selectors & Cascade (Fundamental)</title>
+  <link rel="stylesheet" href="../../../styles.css">
+
+  <meta property="og:title" content="CSS Selectors & Cascade">
+  <meta property="og:description" content="Nắm vững cách CSS chọn phần tử và quyết định quy tắc nào được áp dụng.">
+  <meta property="og:type" content="article">
+
+  <style>
+    /* MAIN CONTENT */
+
+    .content-box {
+      /* Màu nền nhẹ cho box nội dung (màu xanh xám rất nhạt) */
+      padding: 25px;
+      border-left: 5px solid #5a7d9a;
+      margin-bottom: 30px;
+      line-height: 1.7;
+      border-radius: 6px;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      /* Màu chữ tiêu đề khớp với màu header */
+      margin-top: 35px;
+      margin-bottom: 15px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #e9ecef;
+      /* Đường gạch ngang rất mờ */
+    }
+
+    h3 {
+      font-size: 1.3em;
+      /* Màu xanh xám trung tính cho tiêu đề phụ */
+      margin-top: 20px;
+    }
+
+    /* CODE & TABLE */
+    code {
+      /* Nền code rất nhạt */
+      padding: 3px 6px;
+      border-radius: 3px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-weight: bold;
+      color: #c0392b;
+      /* Màu code vẫn giữ đỏ để nổi bật */
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      font-size: 0.95em;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid #e9ecef;
+      /* Border rất nhạt */
+    }
+
+    th,
+    td {
+      padding: 15px;
+      text-align: left;
+    }
+
+    th {
+      /* Màu nền tiêu đề bảng */
+      color: white;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title">CSS: Selectors & Cascade (Fundamental)</h1>
+      <p class="site-subtitle">CSS Selectors & Cascade (Fundamental).</p>
+      <nav class="site-nav" aria-label="Sections">
+        <a href="../index.html" class="nav-link">Back to Phase 1</a>
+        <a href="../../index.html" class="nav-link">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="css-concepts">
+      <div id="selectors-and-cascade" class="section">
+
+        <h2>1. 🎯 CSS Selectors (Bộ chọn)</h2>
+        <div class="content-box">
+          <p><strong>Selectors</strong> là công cụ để **chọn** (find) các phần tử HTML mà bạn muốn áp dụng kiểu dáng.
+            Việc sử dụng các selector phù hợp giúp tối ưu hóa hiệu suất và khả năng bảo trì CSS.</p>
+
+          <h3>Các Loại Selector Phổ Biến</h3>
+          <ul>
+            <li><strong>Type Selector (Phần tử):</strong> Chọn tất cả các phần tử có tên thẻ cụ thể. Ví dụ:
+              <code>p</code>, <code>h2</code>.
+            </li>
+            <li><strong>Class Selector (Lớp):</strong> Chọn các phần tử có thuộc tính <code>class</code> cụ thể. Ví dụ:
+              <code>.card</code>.
+            </li>
+            <li><strong>ID Selector (Định danh):</strong> Chọn phần tử **duy nhất** có thuộc tính <code>id</code>. Ví
+              dụ: <code>#header</code>.</li>
+            <li><strong>Combinators (Bộ kết hợp):</strong> Liên kết các selector dựa trên mối quan hệ (cha-con, anh chị
+              em). Ví dụ: <code>div &gt; p</code> (chọn thẻ <code>p</code> là con trực tiếp của <code>div</code>).</li>
+          </ul>
+        </div>
+
+        <h2>2. 🌊 Cascade (Thứ tự Ưu tiên)</h2>
+        <div class="content-box">
+          <p><strong>Cascade</strong> (Thác nước) là quy tắc quyết định kiểu dáng nào sẽ được áp dụng khi có sự xung đột
+            giữa các quy tắc CSS nhắm vào cùng một phần tử và cùng một thuộc tính. </p>
+          <p>Cascade được xác định bởi ba yếu tố chính theo thứ tự ưu tiên:</p>
+
+          <h3>2.1. Độ Quan trọng (!important)</h3>
+          <p>Khai báo có từ khóa <code>!important</code> được ưu tiên cao hơn tất cả các quy tắc thông thường, bất kể độ
+            đặc hiệu. Thứ tự ưu tiên của <code>!important</code> (từ cao đến thấp):</p>
+          <ol>
+            <li>Quy tắc `!important` của Người dùng (User).</li>
+            <li>Quy tắc `!important` của Tác giả (Author - bạn viết).</li>
+            <li>Quy tắc thông thường của Tác giả.</li>
+            <li>Quy tắc thông thường của Trình duyệt (User Agent).</li>
+          </ol>
+          <p><strong>Khuyến nghị:</strong> Hạn chế sử dụng <code>!important</code>.</p>
+
+          <h3>2.2. Độ Đặc hiệu (Specificity)</h3>
+          <p><strong>Specificity</strong> là một hệ thống tính điểm được sử dụng để chọn quy tắc cụ thể nhất. Quy tắc có
+            tổng điểm cao hơn sẽ được áp dụng.</p>
+
+          <h4>Tính điểm Specificity (A-B-C-D)</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Loại Selector</th>
+                <th>Cột A (Inline)</th>
+                <th>Cột B (ID)</th>
+                <th>Cột C (Class, Attribute, Pseudo-class)</th>
+                <th>Cột D (Element, Pseudo-element)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Inline Style</strong></td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td><strong>ID Selector</strong></td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td><strong>Class Selector</strong></td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td><strong>Type Selector (p, div)</strong></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+              </tr>
+            </tbody>
+          </table>
+          <p><strong>Ví dụ:</strong> Selector <code>#nav .link a</code> có điểm: (0-1-1-1), tổng 111.</p>
+
+          <h3>2.3. Thứ tự Nguồn (Source Order)</h3>
+          <p>Nếu hai quy tắc có cùng **Độ Đặc hiệu** và không có <code>!important</code>, quy tắc được khai báo **sau
+            cùng** (xuất hiện cuối cùng trong tệp CSS hoặc tệp được tải sau) sẽ được áp dụng.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer role="contentinfo" class="site-footer">
+    <div class="container">
+      <p><strong>Remember:</strong> SEO is an ongoing process, not a one-time task.</p>
+      <p>Keep learning, testing, and improving your HTML structure for better search rankings.</p>
+      <p style="margin-top: 20px; opacity: 0.7;">© 2024 SEO HTML Guide | Created for Educational Purposes</p>
+    </div>
+  </footer>
+</body>
+
+</html>

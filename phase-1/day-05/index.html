@@ -1,48 +1,66 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Day 5 — CSS Selectors & Cascade</title>
-	<link rel="stylesheet" href="./styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="A comprehensive guide to Basic SEO HTML concepts and best practices for better search engine rankings">
+  <meta name="keywords" content="SEO, HTML, Search Engine Optimization, Meta Tags, Semantic HTML">
+  <meta name="author" content="Web Developer">
+  <title>CSS: Selectors & Cascade</title>
+  <link rel="stylesheet" href="../../styles.css">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Basic SEO HTML Guide">
+  <meta property="og:description" content="Master HTML SEO techniques for better search rankings">
+  <meta property="og:type" content="website">
 </head>
+
 <body>
-	<header class="site-header">
-		<h1 class="site-title">Selectors in Action</h1>
-		<nav class="primary-nav" aria-label="Primary">
-			<ul class="nav-list">
-				<li><a class="nav-link" href="#">Home</a></li>
-				<li><a class="nav-link is-active" href="#">Articles</a></li>
-				<li><a class="nav-link" href="#">About</a></li>
-				<li><a class="nav-link" href="#">Contact</a></li>
-			</ul>
-		</nav>
-	</header>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title">CSS: Selectors & Cascade</h1>
+      <p class="site-subtitle">CSS Selectors & Cascade.</p>
+      <nav class="site-nav" aria-label="Sections">
+        <a href="../index.html" class="nav-link">Back to Phase 1</a>
+        <a href="../../index.html" class="nav-link">Home</a>
+      </nav>
+    </div>
+  </header>
 
-	<main class="container">
-		<article class="post" data-topic="html">
-			<h2 class="post-title">Styling Without IDs</h2>
-			<p class="post-meta"><time datetime="2025-11-29">Nov 29, 2025</time> • CSS selectors, specificity</p>
-			<p class="lead">Use element, class, attribute, and pseudo-class selectors to target UI affordances cleanly.</p>
-			<p>Visit our <a href="#" title="Read the accessibility guide">accessibility guide</a> and <a href="#" title="Check the style guide">style guide</a> for details.</p>
-			<a class="button" href="#" data-variant="primary">Read more</a>
-			<a class="button" href="#" data-variant="secondary" disabled aria-disabled="true">Disabled</a>
-		</article>
+  <main class="container">
+    <section id="concepts">
+      <div id="week-1" class="section">
+        <div class="grid">
+          <a class="card" href="./exercises/fundamental.html">
+            <h3>CSS: Selectors & Cascade (Fundamental)</h3>
+            <p>Selectors (type, class, id, attribute, pseudo), specificity, and the cascade.</p>
+          </a>
+          <a class="card" href="./exercises/quiz-basic.html">
+            <h3>Quiz Basic</h3>
+            <p>Basics: type, class, and id selectors; intro to specificity and cascade.</p>
+          </a>
+          <a class="card" href="./exercises/quiz-medium.html">
+            <h3>Quiz Medium</h3>
+            <p>Attribute and pseudo-class selectors; inheritance, conflict resolution, and specificity.</p>
+          </a>
+          <a class="card" href="./exercises/quiz-hard.html">
+            <h3>Quiz Hard</h3>
+            <p>Pseudo-elements, complex selector chains, specificity edge cases, and cascade overrides.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-		<section class="signup">
-			<h3>Newsletter</h3>
-			<form action="#" method="post">
-				<label>Email
-					<input type="email" name="email" placeholder="you@example.com" required>
-				</label>
-				<label>
-					<input type="checkbox" name="agree"> I agree to receive emails
-				</label>
-				<button class="button" type="submit" data-variant="primary">Subscribe</button>
-			</form>
-		</section>
-	</main>
+  <footer role="contentinfo" class="site-footer">
+    <div class="container">
+      <p><strong>Remember:</strong> SEO is an ongoing process, not a one-time task.</p>
+      <p>Keep learning, testing, and improving your HTML structure for better search rankings.</p>
+      <p style="margin-top: 20px; opacity: 0.7;">© 2024 SEO HTML Guide | Created for Educational Purposes</p>
+    </div>
+  </footer>
 </body>
+
 </html>
-
-
