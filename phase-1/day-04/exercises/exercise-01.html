@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 4 — Exercise 01</title>
+  <link rel="stylesheet" href="../../../styles.css">
+  <link rel="stylesheet" href="https://dev.prismjs.com/themes/prism.css" />
+  <style>
+    .practice-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 12px;
+      padding: 8px 12px;
+      font-size: 1.25rem;
+      line-height: 1.2;
+      border-radius: 6px;
+      border-left: 6px solid transparent;
+      background: #f6f7f9;
+    }
+
+    .practice-title.bad {
+      color: #b42318;
+      border-left-color: #f04438;
+      background: #fff3f2;
+    }
+
+    .practice-title.best {
+      color: #067647;
+      border-left-color: #12b76a;
+      background: #ecfdf3;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title">Day 4 — Exercise 01</h1>
+      <p class="site-subtitle">Best practice for HTML.</p>
+      <nav class="site-nav" aria-label="Sections">
+        <a href="../index.html" class="nav-link">Back to Day 04</a>
+        <a href="../../index.html" class="nav-link">Back to Phase 1</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <h2 class="practice-title bad">Bad Practice</h2>
+      <pre>
+        <code class="language-html">
+          &#x3C;!DOCTYPE html&#x3E;
+          &#x3C;html&#x3E;
+          &#x3C;head&#x3E;
+          &#09;&#x3C;title&#x3E;Homepage&#x3C;/title&#x3E;
+          &#x3C;/head&#x3E;
+          &#x3C;body&#x3E;
+          &#09;&#x3C;font size=&#x22;6&#x22;&#x3E;The Importance of Bees&#x3C;/font&#x3E;
+          
+          &#09;&#x3C;p&#x3E;&#x3C;b&#x3E;This is an image of a bee on a flower.&#x3C;/b&#x3E;&#x3C;/p&#x3E;
+          &#09;&#x3C;img src=&#x22;bee.jpg&#x22; width=&#x22;400&#x22; height=&#x22;300&#x22;&#x3E;
+          
+          &#09;&#x3C;p&#x3E;
+          &#09;&#09;Bees are crucial for the global ecosystem. They pollinate many of the foods we eat every day.
+          &#09;&#09;&#x3C;br&#x3E;&#x3C;br&#x3E;
+          &#09;&#09;&#x3C;i&#x3E;For more info, click here:&#x3C;/i&#x3E; &#x3C;a href=&#x22;/more-info&#x22;&#x3E;Click Me&#x3C;/a&#x3E;
+          &#09;&#x3C;/p&#x3E;
+          
+          &#09;&#x3C;h2&#x3E;Small Heading&#x3C;/h2&#x3E;
+          &#09;&#x3C;p&#x3E;Some more text that isn&#x27;t very important and uses a random heading tag.&#x3C;/p&#x3E;
+          
+          &#09;&#x3C;div style=&#x22;color:red;&#x22;&#x3E;Important Notice: This content is about *insects*.&#x3C;/div&#x3E;
+          &#x3C;/body&#x3E;
+          &#x3C;/html&#x3E;
+        </code>
+      </pre>
+      <h3>Key SEO Mistakes in the "Bad" Version:</h3>
+      <ol>
+        <li>
+          <b>Poor <code>&lt;title&gt;</code> Tag:</b> It's too generic ("Homepage") and doesn't
+            contain relevant keywords ("Bees," "Pollination").
+        </li>
+        <li>
+          <b>Non-Semantic Headings:</b> Using <code>&lt;font size="6"&gt;</code> instead of an
+            <b><code>&lt;h1&gt;</code></b> tag for the main title. <span class="citation-11">Search engines rely on
+            </span><code><span class="citation-11">&lt;h1&gt;</span></code><span class="citation-11 citation-end-11"> for the
+              page's primary topic.
+        </li>
+        <li>
+          <b>Missing <code>alt</code> Text on Images:</b> The <code>&lt;img&gt;</code> tag is
+            missing the <b><code>alt</code> attribute</b>, which is essential for accessibility and providing context
+            (keywords) to search engines.
+        </li>
+        <li>
+            <b>Anchor Text (Link Text):</b> The anchor text is "Click Me," which is vague. <span>Search engines look at anchor text to understand the topic of the linked page.</span>
+        </li>
+        <li>
+          <b>Arbitrary Heading Use:</b> Using a <code>&lt;h2&gt;</code> for "Small Heading" without a logical hierarchy just to make the text look slightly larger.
+        </li>
+        <li>
+          <b>Non-Semantic Markup:</b> Using tags like <code>&lt;br&gt;</code> for spacing or
+            <code>&lt;b&gt;</code>/<code>&lt;i&gt;</code> for basic styling instead of <b>CSS</b> or more appropriate tags
+            like <code>&lt;strong&gt;</code> or <code>&lt;em&gt;</code>.
+        </li>
+      </ol>
+    </section>
+    <section class="section" id="best-practice" style="display: none;">
+      <h2 class="practice-title best">Best Practice</h2>
+      <pre>
+        <code class="language-html">
+          &#x3C;!DOCTYPE html&#x3E;
+          &#x3C;html&#x3E;
+          &#09;&#x3C;head&#x3E;
+          &#09;&#09;&#x3C;title&#x3E;The Crucial Role of Bees in Pollination and Ecosystem Health&#x3C;/title&#x3E;
+          &#09;&#09;&#x3C;meta name=&#x22;description&#x22; content=&#x22;Learn why bees are vital for agriculture and the global ecosystem, and discover how pollination works.&#x22;&#x3E;
+          &#09;&#09;&#x3C;link rel=&#x22;stylesheet&#x22; href=&#x22;styles.css&#x22;&#x3E;
+          &#09;&#x3C;/head&#x3E;
+          &#09;&#x3C;body&#x3E;
+          &#09;&#09;&#x3C;h1&#x3E;The Crucial Role of Bees in Pollination and Ecosystem Health&#x3C;/h1&#x3E;
+          
+          &#09;&#09;&#x3C;img src=&#x22;bee.jpg&#x22; alt=&#x22;A honey bee covered in pollen resting on a yellow sunflower.&#x22;&#x3E;
+          
+          &#09;&#09;&#x3C;p&#x3E;Bees are crucial for the global **ecosystem**. They are responsible for pollinating many of the foods we eat every day, making them **vital** for agriculture.&#x3C;/p&#x3E;
+          
+          &#09;&#09;&#x3C;h2&#x3E;Understanding the Pollination Process&#x3C;/h2&#x3E;
+          &#09;&#09;&#x3C;p&#x3E;Pollination is the transfer of pollen from the male parts to the female parts of a flower. This is the first step in producing fruits and seeds.&#x3C;/p&#x3E;
+          &#09;&#09;&#x3C;p&#x3E;For detailed information on saving bee populations, visit our page on&#x3C;a href=&#x22;/more-info&#x22;&#x3E;Bee Conservation Efforts&#x3C;/a&#x3E;.&#x3C;/p&#x3E;
+          
+          &#09;&#09;&#x3C;aside&#x3E;
+          &#09;&#09;&#09;&#x3C;p&#x3E;Did you know? Bees are responsible for pollinating over 100 crop varieties in the U.S.&#x3C;/p&#x3E;
+          &#09;&#09;&#x3C;/aside&#x3E;
+          &#09;&#x3C;/body&#x3E;
+          &#x3C;/html&#x3E;
+        </code>
+      </pre>
+      <h3>Key SEO Improvements in the "Best Practice" Version:</h3>
+      <ol>
+        <li><b>Optimized <code>&lt;title&gt;</code> and <code>&lt;meta name="description"&gt;</code>:</b> These are the first things search engines and users see. They are clear, specific, and use relevant keywords</li>
+        <li><b>Semantic <code>&lt;h1&gt;</code>:</b> Correctly identifies the main topic of the page.</li>
+        <li><b>Descriptive <code>alt</code> text:</b> Provides crucial context for the image and helps with keyword relevance.</li>
+        <li><b>Logical heading structure:</b> The main topic is <code>&lt;h1&gt;</code>, and sub-topics are <code>&lt;h2&gt;</code>. This hierarchy signals the content structure to search engines.</li>
+        <li><b>Keyword-rich anchor text:</b> "Bee Conservation Efforts" is much more descriptive and valuable than "Click Me."</li>
+        <li><b>Semantic HTML5 tags:</b> Uses tags like <code>&lt;aside&gt;</code> for related, secondary content, which gives structure to the document and helps search engines understand the purpose of the content block.</li>
+      </ol>
+    </section>
+    <button id="show-best-practice-btn" class="btn" onclick="showBestPractice()">Show Best Practice</button>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 Frontend Developer learning path specializing in React + TypeScript</p>
+    </div>
+  </footer>
+  <script src="https://dev.prismjs.com/prism.js"></script>
+  <script>
+    function showBestPractice() {
+      document.getElementById('best-practice').style.display = 'block';
+      document.getElementById('show-best-practice-btn').style.display = 'none';
+    }
+  </script>
+</body>
+
+</html>
