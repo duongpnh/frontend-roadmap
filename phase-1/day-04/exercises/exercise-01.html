@@ -32,6 +32,58 @@
       border-left-color: #12b76a;
       background: #ecfdf3;
     }
+
+    /* Centered circular arrow button */
+    .arrow-down-btn {
+      display: grid;
+      place-items: center;
+      width: 56px;
+      height: 56px;
+      margin: 16px auto 0;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+      color: var(--accent);
+      font-size: 1.25rem;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+      transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, border-color .18s ease;
+    }
+
+    .arrow-down-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+      border-color: rgba(37, 99, 235, 0.35);
+      background: rgba(17, 24, 39, 0.02);
+    }
+
+    .arrow-down-btn:active {
+      transform: translateY(0);
+    }
+
+    .arrow-down-btn span {
+      animation: arrow-bounce 1.2s ease-in-out infinite;
+    }
+
+    @keyframes arrow-bounce {
+
+      0%,
+      100% {
+        transform: translateY(-1px);
+      }
+
+      50% {
+        transform: translateY(2px);
+      }
+    }
+
+    .arrow-hint {
+      text-align: center;
+      margin-top: 8px;
+      color: var(--muted-text);
+      font-size: .95rem;
+    }
   </style>
 </head>
 
@@ -81,29 +133,32 @@
       <ol>
         <li>
           <b>Poor <code>&lt;title&gt;</code> Tag:</b> It's too generic ("Homepage") and doesn't
-            contain relevant keywords ("Bees," "Pollination").
+          contain relevant keywords ("Bees," "Pollination").
         </li>
         <li>
           <b>Non-Semantic Headings:</b> Using <code>&lt;font size="6"&gt;</code> instead of an
-            <b><code>&lt;h1&gt;</code></b> tag for the main title. <span class="citation-11">Search engines rely on
-            </span><code><span class="citation-11">&lt;h1&gt;</span></code><span class="citation-11 citation-end-11"> for the
-              page's primary topic.
+          <b><code>&lt;h1&gt;</code></b> tag for the main title. <span class="citation-11">Search engines rely on
+          </span><code><span class="citation-11">&lt;h1&gt;</span></code><span class="citation-11 citation-end-11"> for
+            the
+            page's primary topic.
         </li>
         <li>
           <b>Missing <code>alt</code> Text on Images:</b> The <code>&lt;img&gt;</code> tag is
-            missing the <b><code>alt</code> attribute</b>, which is essential for accessibility and providing context
-            (keywords) to search engines.
+          missing the <b><code>alt</code> attribute</b>, which is essential for accessibility and providing context
+          (keywords) to search engines.
         </li>
         <li>
-            <b>Anchor Text (Link Text):</b> The anchor text is "Click Me," which is vague. <span>Search engines look at anchor text to understand the topic of the linked page.</span>
+          <b>Anchor Text (Link Text):</b> The anchor text is "Click Me," which is vague. <span>Search engines look at
+            anchor text to understand the topic of the linked page.</span>
         </li>
         <li>
-          <b>Arbitrary Heading Use:</b> Using a <code>&lt;h2&gt;</code> for "Small Heading" without a logical hierarchy just to make the text look slightly larger.
+          <b>Arbitrary Heading Use:</b> Using a <code>&lt;h2&gt;</code> for "Small Heading" without a logical hierarchy
+          just to make the text look slightly larger.
         </li>
         <li>
           <b>Non-Semantic Markup:</b> Using tags like <code>&lt;br&gt;</code> for spacing or
-            <code>&lt;b&gt;</code>/<code>&lt;i&gt;</code> for basic styling instead of <b>CSS</b> or more appropriate tags
-            like <code>&lt;strong&gt;</code> or <code>&lt;em&gt;</code>.
+          <code>&lt;b&gt;</code>/<code>&lt;i&gt;</code> for basic styling instead of <b>CSS</b> or more appropriate tags
+          like <code>&lt;strong&gt;</code> or <code>&lt;em&gt;</code>.
         </li>
       </ol>
     </section>
@@ -138,15 +193,25 @@
       </pre>
       <h3>Key SEO Improvements in the "Best Practice" Version:</h3>
       <ol>
-        <li><b>Optimized <code>&lt;title&gt;</code> and <code>&lt;meta name="description"&gt;</code>:</b> These are the first things search engines and users see. They are clear, specific, and use relevant keywords</li>
+        <li><b>Optimized <code>&lt;title&gt;</code> and <code>&lt;meta name="description"&gt;</code>:</b> These are the
+          first things search engines and users see. They are clear, specific, and use relevant keywords</li>
         <li><b>Semantic <code>&lt;h1&gt;</code>:</b> Correctly identifies the main topic of the page.</li>
-        <li><b>Descriptive <code>alt</code> text:</b> Provides crucial context for the image and helps with keyword relevance.</li>
-        <li><b>Logical heading structure:</b> The main topic is <code>&lt;h1&gt;</code>, and sub-topics are <code>&lt;h2&gt;</code>. This hierarchy signals the content structure to search engines.</li>
-        <li><b>Keyword-rich anchor text:</b> "Bee Conservation Efforts" is much more descriptive and valuable than "Click Me."</li>
-        <li><b>Semantic HTML5 tags:</b> Uses tags like <code>&lt;aside&gt;</code> for related, secondary content, which gives structure to the document and helps search engines understand the purpose of the content block.</li>
+        <li><b>Descriptive <code>alt</code> text:</b> Provides crucial context for the image and helps with keyword
+          relevance.</li>
+        <li><b>Logical heading structure:</b> The main topic is <code>&lt;h1&gt;</code>, and sub-topics are
+          <code>&lt;h2&gt;</code>. This hierarchy signals the content structure to search engines.
+        </li>
+        <li><b>Keyword-rich anchor text:</b> "Bee Conservation Efforts" is much more descriptive and valuable than
+          "Click Me."</li>
+        <li><b>Semantic HTML5 tags:</b> Uses tags like <code>&lt;aside&gt;</code> for related, secondary content, which
+          gives structure to the document and helps search engines understand the purpose of the content block.</li>
       </ol>
     </section>
-    <button id="show-best-practice-btn" class="btn" onclick="showBestPractice()">Show Best Practice</button>
+    <button id="show-best-practice-btn" class="btn arrow-down-btn" type="button" onclick="showBestPractice()"
+      aria-label="Show Best Practice">
+      <span aria-hidden="true">↓</span>
+    </button>
+    <div id="arrow-hint" class="arrow-hint">Reveal best‑practice example</div>
   </main>
 
   <footer class="site-footer">
@@ -155,10 +220,12 @@
     </div>
   </footer>
   <script src="https://dev.prismjs.com/prism.js"></script>
-  <script rel="defer">
+  <script>
     function showBestPractice() {
       document.getElementById('best-practice').style.display = 'block';
       document.getElementById('show-best-practice-btn').style.display = 'none';
+      var hint = document.getElementById('arrow-hint');
+      if (hint) hint.style.display = 'none';
     }
   </script>
 </body>
