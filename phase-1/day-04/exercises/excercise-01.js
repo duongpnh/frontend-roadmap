@@ -1,0 +1,1 @@
+function a() {document.getElementById('best-practice').style.display = 'block';document.getElementById('show-best-practice-btn').style.display = 'none';}
