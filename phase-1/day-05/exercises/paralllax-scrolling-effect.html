@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wanderlust | The Ultimate Travel Platform</title>
+    <!-- Importing Google Fonts for a modern look -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* --- RESET & BASICS --- */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: 'Montserrat', sans-serif;
+        color: #333;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+      }
+
+      /* --- NAVIGATION --- */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 20px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        backdrop-filter: blur(5px);
+      }
+
+      .logo {
+        color: white;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+        font-weight: bold;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        margin-left: 30px;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #ff7e5f;
+      }
+
+      /* --- THE PARALLAX MAGIC --- */
+      /* This class creates the effect */
+      .parallax {
+        /* The image will try to fill the height */
+        min-height: 100vh;
+
+        /* Create the parallax scrolling effect */
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        /* Flexbox to center content */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+      }
+
+      /* Overlay to make text readable on bright images */
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+      }
+
+      /* Content inside parallax sections */
+      .parallax-content {
+        position: relative;
+        z-index: 2;
+        color: white;
+        max-width: 800px;
+        padding: 20px;
+      }
+
+      .parallax-content h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 4rem;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .parallax-content h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        margin-bottom: 15px;
+      }
+
+      .parallax-content p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+      }
+
+      /* --- BACKGROUND IMAGES --- */
+      /* Hero Section Image */
+      .bg-1 {
+        background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2070&auto=format&fit=crop');
+      }
+
+      /* Section 2 Image (Planning) */
+      .bg-2 {
+        background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2021&auto=format&fit=crop');
+        min-height: 60vh; /* Slightly smaller height for mid-sections */
+      }
+
+      /* Section 3 Image (Community) */
+      .bg-3 {
+        background-image: url('https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?q=80&w=2070&auto=format&fit=crop');
+        min-height: 60vh;
+      }
+
+      /* --- STATIC CONTENT SECTIONS --- */
+      .static-section {
+        padding: 80px 20px;
+        background-color: #fff;
+        color: #444;
+        text-align: center;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        margin-top: 50px;
+      }
+
+      .feature-card {
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .feature-icon {
+        font-size: 2rem;
+        margin-bottom: 15px;
+        display: block;
+      }
+
+      /* --- BUTTONS --- */
+      .btn {
+        display: inline-block;
+        padding: 15px 35px;
+        background-color: #ff7e5f;
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: bold;
+        transition: background 0.3s, transform 0.2s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .btn:hover {
+        background-color: #eb6648;
+        transform: scale(1.05);
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        background-color: #222;
+        color: #888;
+        text-align: center;
+        padding: 40px 20px;
+        font-size: 0.9rem;
+      }
+
+      /* --- RESPONSIVE --- */
+      @media (max-width: 768px) {
+        .parallax-content h1 {
+          font-size: 2.5rem;
+        }
+        .parallax-content h2 {
+          font-size: 2rem;
+        }
+        nav {
+          padding: 15px 20px;
+        }
+        .nav-links {
+          display: none;
+        } /* Hidden for simplicity on mobile */
+        .parallax {
+          background-attachment: scroll;
+        } /* Disable parallax on mobile for performance */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="logo">WANDERLUST</div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#community">Community</a>
+        <a href="#download">Get App</a>
+      </div>
+    </nav>
+
+    <!-- 1. Hero Parallax Section -->
+    <section id="home" class="parallax bg-1">
+      <div class="overlay"></div>
+      <div class="parallax-content">
+        <h1>Travel Without Limits</h1>
+        <p>
+          The all-in-one platform to plan, book, and share your next great
+          adventure.
+        </p>
+        <a href="#features" class="btn">Start Exploring</a>
+      </div>
+    </section>
+
+    <!-- 2. Static Content: Intro/Value Prop -->
+    <section class="static-section">
+      <div class="container">
+        <h2>Everything You Need in One Place</h2>
+        <p>
+          Stop juggling ten different tabs. Wanderlust brings flights, stays,
+          and experiences together.
+        </p>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <span class="feature-icon">✈️</span>
+            <h3>Smart Flight Search</h3>
+            <p>
+              AI-powered algorithms to find you the best routes at the cheapest
+              prices.
+            </p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">🏨</span>
+            <h3>Curated Stays</h3>
+            <p>
+              From boutique hotels to cozy treehouses, find a home away from
+              home.
+            </p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">🗺️</span>
+            <h3>Visual Itineraries</h3>
+            <p>Drag and drop your plans onto a map and sync them offline.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Parallax Break: Inspiration -->
+    <section id="community" class="parallax bg-2">
+      <div class="overlay"></div>
+      <div class="parallax-content">
+        <h2>Your Journey, Your Way</h2>
+        <p>
+          Customize every detail or copy itineraries from top travel influencers
+          with one click.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. Static Content: Community -->
+    <section class="static-section" style="background-color: #fafafa">
+      <div class="container">
+        <h2>Join the Global Community</h2>
+        <p style="max-width: 600px; margin: 0 auto 30px auto">
+          Connect with over 2 million travelers sharing hidden gems, local tips,
+          and real-time advice.
+        </p>
+        <div class="features-grid">
+          <div class="feature-card">
+            <h3>📷 Photo Journals</h3>
+            <p>Upload your memories and pin them to the world map.</p>
+          </div>
+          <div class="feature-card">
+            <h3>💬 Travel Forums</h3>
+            <p>Ask questions and get answers from locals.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Parallax Break: Call to Action -->
+    <section id="download" class="parallax bg-3">
+      <div class="overlay"></div>
+      <div class="parallax-content">
+        <h2>Ready to Go?</h2>
+        <p>
+          Download the Wanderlust app today and get $50 off your first booking.
+        </p>
+        <a href="#" class="btn">Download for iOS / Android</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2023 Wanderlust Travel Platform. All rights reserved.</p>
+      <p>Made with pure HTML & CSS.</p>
+    </footer>
+  </body>
+</html>
