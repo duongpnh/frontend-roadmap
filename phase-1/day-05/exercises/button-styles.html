@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Styles</title>
+    <link rel="stylesheet" href="../../../styles.css">
+    <style>
+      .iframe-wrapper {
+        position: relative;
+        margin-top: 1.5rem;
+        border-radius: 16px;
+        overflow: hidden;
+        background: linear-gradient(145deg, #1a1f35, #0d1117);
+        box-shadow: 
+          0 25px 50px -12px rgba(0, 0, 0, 0.4),
+          0 0 0 1px rgba(255, 255, 255, 0.05),
+          inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      }
+
+      .iframe-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.85rem 1.25rem;
+        background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .iframe-dots {
+        display: flex;
+        gap: 8px;
+      }
+
+      .iframe-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        transition: transform 0.2s ease, filter 0.2s ease;
+      }
+
+      .iframe-dot:hover {
+        transform: scale(1.15);
+        filter: brightness(1.2);
+      }
+
+      .iframe-dot.red { background: #ff5f57; box-shadow: 0 0 8px rgba(255, 95, 87, 0.4); }
+      .iframe-dot.yellow { background: #ffbd2e; box-shadow: 0 0 8px rgba(255, 189, 46, 0.4); }
+      .iframe-dot.green { background: #28ca41; box-shadow: 0 0 8px rgba(40, 202, 65, 0.4); }
+
+      .iframe-title {
+        flex: 1;
+        text-align: center;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 0.02em;
+        font-family: 'SF Mono', 'Fira Code', 'Monaco', monospace;
+      }
+
+      .iframe-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.35rem 0.65rem;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #22c55e;
+        background: rgba(34, 197, 94, 0.1);
+        border: 1px solid rgba(34, 197, 94, 0.2);
+        border-radius: 6px;
+      }
+
+      .iframe-badge::before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        background: #22c55e;
+        border-radius: 50%;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(0.8); }
+      }
+
+      .iframe-container {
+        position: relative;
+        background: #0d1117;
+      }
+
+      .iframe-container iframe {
+        display: block;
+        width: 100%;
+        height: 600px;
+        border: none;
+        background: #1e1e1e;
+      }
+
+      .iframe-glow {
+        position: absolute;
+        inset: -1px;
+        border-radius: 16px;
+        pointer-events: none;
+        background: linear-gradient(135deg, 
+          rgba(34, 197, 94, 0.15) 0%, 
+          transparent 40%, 
+          transparent 60%, 
+          rgba(59, 130, 246, 0.15) 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        z-index: -1;
+      }
+
+      .iframe-wrapper:hover .iframe-glow {
+        opacity: 1;
+      }
+
+      .exercise-header {
+        margin-bottom: 0.5rem;
+      }
+
+      .exercise-header p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.6;
+        max-width: 65ch;
+      }
+    </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title">CSS: Selectors & Cascade (Fundamental)</h1>
+      <p class="site-subtitle">CSS Selectors & Cascade (Fundamental).</p>
+      <nav class="site-nav" aria-label="Sections">
+        <a href="../index.html" class="nav-link">Back to Phase 1</a>
+        <a href="../../index.html" class="nav-link">Home</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <div class="exercise-header">
+      <h1>Button Styles</h1>
+      <p>Practice styling buttons using CSS selectors, specificity, and cascade rules. Experiment with different states like hover, active, and focus to create interactive button designs.</p>
+    </div>
+
+    <div class="iframe-wrapper">
+      <div class="iframe-glow"></div>
+      <div class="iframe-header">
+        <div class="iframe-dots">
+          <span class="iframe-dot red"></span>
+          <span class="iframe-dot yellow"></span>
+          <span class="iframe-dot green"></span>
+        </div>
+        <span class="iframe-title">stackblitz.com</span>
+        <span class="iframe-badge">Live</span>
+      </div>
+      <div class="iframe-container">
+        <iframe src="https://stackblitz.com/edit/stackblitz-starters-e3gjpfkv?embed=1" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope"></iframe>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo" class="site-footer">
+    <div class="container">
+      <p><strong>Remember:</strong> SEO is an ongoing process, not a one-time task.</p>
+      <p>Keep learning, testing, and improving your HTML structure for better search rankings.</p>
+      <p style="margin-top: 20px; opacity: 0.7;">© 2024 SEO HTML Guide | Created for Educational Purposes</p>
+    </div>
+  </footer>
+</body>
+</html>
