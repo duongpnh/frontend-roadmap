@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 1: The Holy Trinity (Type, Class, ID)</title>
+  <link rel="stylesheet" href="e.css">
+  <link rel="stylesheet" href="https://dev.prismjs.com/themes/prism.css" />
+  <style>
+    /* TODO 1: Select all paragraphs and make their text color gray. */
+    p {
+      color: gray;
+    }
+
+    /* TODO 2: Select the element with the class "highlight" and make the background yellow. */
+    .highlight {
+      background-color: yellow;
+    }
+    /* TODO 3: Select the element with the ID "unique-header" and make the font-size 50px. */
+    #unique-header {
+      font-size: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2 id="title">HTML Code</h2>
+    <div id="description">Copy and paste this code into your HTML file.</div>
+    <pre>
+      <code class="language-html">
+        &lt;!DOCTYPE html&gt;
+        &lt;html lang="en"&gt;
+        
+        &lt;head&gt;
+          &lt;meta charset="UTF-8"&gt;
+          &lt;title&gt;Exercise 1: Basic Selectors&lt;/title&gt;
+          &lt;style&gt;
+            /* TODO 1: Select all paragraphs and make their text color gray. */
+        
+            /* TODO 2: Select the element with the class "highlight" and make the background yellow. */
+        
+            /* TODO 3: Select the element with the ID "unique-header" and make the font-size 30px. */
+          &lt;/style&gt;
+        &lt;/head&gt;
+        
+        &lt;body&gt;
+          &lt;h1 id="unique-header"&gt;I am unique&lt;/h1&gt;
+          &lt;p&gt;I am a standard paragraph.&lt;/p&gt;
+          &lt;p class="highlight"&gt;I am a highlighted paragraph.&lt;/p&gt;
+          &lt;p&gt;I am another standard paragraph.&lt;/p&gt;
+        &lt;/body&gt;
+        
+        &lt;/html&gt;
+      </code>
+    </pre>
+    <div>
+      <h2 id="expected-result">Expected Result</h2>
+      <div>
+        <h1 id="unique-header">I am unique</h1>
+        <p>I am a standard paragraph.</p>
+        <p class="highlight">I am a highlighted paragraph.</p>
+        <p>I am another standard paragraph.</p>
+      </div>
+    </div>
+  </div>
+  <script src="https://dev.prismjs.com/prism.js"></script>
+</body>
+
+</html>

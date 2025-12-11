@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 3: Siblings</title>
+  <link rel="stylesheet" href="e.css">
+  <link rel="stylesheet" href="https://dev.prismjs.com/themes/prism.css" />
+  <style>
+    /* TODO 1: Select the paragraph that comes IMMEDIATELY after the h2. 
+        Make the text uppercase. */
+    h2 + p {
+      text-transform: uppercase;
+    }
+    /* TODO 2: Select ALL paragraphs that follow the h2 (siblings). 
+        Give them a left margin of 20px. */
+    h2 ~ p {
+      margin-left: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2 id="title">HTML Code</h2>
+    <div id="description">Copy and paste this code into your HTML file.</div>
+    <pre>
+      <code class="language-html">
+        &lt;!DOCTYPE html&gt;
+        &lt;html lang="en"&gt;
+        
+        &lt;head&gt;
+          &lt;meta charset="UTF-8"&gt;
+          &lt;title&gt;Exercise 3: Siblings&lt;/title&gt;
+          &lt;style&gt;
+            /* TODO 1: Select the paragraph that comes IMMEDIATELY after the h2. 
+                   Make the text uppercase. */
+        
+            /* TODO 2: Select ALL paragraphs that follow the h2 (siblings). 
+                   Give them a left margin of 20px. */
+          &lt;/style&gt;
+        &lt;/head&gt;
+        
+        &lt;body&gt;
+          &lt;h2&gt;The Heading&lt;/h2&gt;
+          &lt;p&gt;I am the immediate neighbor.&lt;/p&gt;
+          &lt;p&gt;I am a neighbor further down.&lt;/p&gt;
+          &lt;div&gt;I am not a paragraph, I break the chain.&lt;/div&gt;
+          &lt;p&gt;I am still a sibling of h2.&lt;/p&gt;
+        &lt;/body&gt;
+        
+        &lt;/html&gt;
+      </code>
+    </pre>
+    <div>
+      <h2 id="expected-result">Expected Result</h2>
+      <div>
+        <h2>The Heading</h2>
+        <p>I am the immediate neighbor.</p>
+        <p>I am a neighbor further down.</p>
+        <div>I am not a paragraph, I break the chain.</div>
+        <p>I am still a sibling of h2.</p>
+      </div>
+    </div>
+  </div>
+  <script src="https://dev.prismjs.com/prism.js"></script>
+</body>
+
+</html>

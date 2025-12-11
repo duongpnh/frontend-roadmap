@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 7: The Cascade</title>
+  <link rel="stylesheet" href="e.css">
+  <link rel="stylesheet" href="https://dev.prismjs.com/themes/prism.css" />
+  <style>
+    /* QUESTION: What color will the text be? 
+        TODO: Rearrange these rules so the text becomes Blue.
+    */
+
+    p {
+        color: red;
+    }
+
+    p {
+        color: green;
+    }
+
+    p {
+        color: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2 id="title">HTML Code</h2>
+    <div id="description">Copy and paste this code into your HTML file.</div>
+    <pre>
+      <code class="language-html">
+        &lt;!DOCTYPE html&gt;
+        &lt;html lang="en"&gt;
+        
+        &lt;head&gt;
+          &lt;meta charset="UTF-8"&gt;
+          &lt;title&gt;Exercise 7: The Cascade&lt;/title&gt;
+          &lt;style&gt;
+            /* QUESTION: What color will the text be? 
+                   TODO: Rearrange these rules so the text becomes Blue.
+                */
+        
+            p {
+              color: blue;
+            }
+        
+            p {
+              color: red;
+            }
+        
+            p {
+              color: green;
+            }
+          &lt;/style&gt;
+        &lt;/head&gt;
+        
+        &lt;body&gt;
+          &lt;p&gt;Which rule wins?&lt;/p&gt;
+        &lt;/body&gt;
+        
+        &lt;/html&gt;
+      </code>
+    </pre>
+    <div>
+      <h2 id="expected-result">Expected Result</h2>
+      <div>
+        <p>Which rule wins?</p>
+      </div>
+    </div>
+  </div>
+  <script src="https://dev.prismjs.com/prism.js"></script>
+</body>
+
+</html>

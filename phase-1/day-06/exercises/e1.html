@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exercise 1 — Box Model & Layout Foundations</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+  <header class="page-header u-pad">
+    <h1>Cards & Two-Column Layout</h1>
+    <p>Box model, spacing, and classic layout techniques.</p>
+  </header>
+
+  <main class="u-pad">
+    <section aria-labelledby="cards">
+      <h2 id="cards">Card component</h2>
+      <div class="card-grid">
+        <article class="card">
+          <img class="card-media" src="https://picsum.photos/400/220?1" alt="Abstract image 1">
+          <div class="card-body">
+            <h3 class="card-title">Card One</h3>
+            <p>Demonstrates padding, borders, and rounded corners.</p>
+            <a class="card-button" href="#">Details</a>
+          </div>
+        </article>
+        <article class="card">
+          <img class="card-media" src="https://picsum.photos/404/220?2" alt="Abstract image 2">
+          <div class="card-body">
+            <h3 class="card-title">Card Two</h3>
+            <p>Uses `box-sizing: border-box` to keep widths predictable.</p>
+            <a class="card-button" href="#">Details</a>
+          </div>
+        </article>
+        <article class="card">
+          <img class="card-media" src="https://picsum.photos/402/220?3" alt="Abstract image 3">
+          <div class="card-body">
+            <h3 class="card-title">Card Three</h3>
+            <p>Shows margin vs padding and simple shadows.</p>
+            <a class="card-button" href="#">Details</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="twocol" class="u-mt">
+      <h2 id="twocol">Two-column (inline-block)</h2>
+      <div class="two-col">
+        <div class="col">
+          <h3>Column A</h3>
+          <p>Inline-block avoids float clearing, but introduces whitespace quirks.</p>
+        </div>
+        <div class="col">
+          <h3>Column B</h3>
+          <p>Modern CSS prefers Flexbox/Grid, but this illustrates history.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>

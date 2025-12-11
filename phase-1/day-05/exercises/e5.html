@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 5: Pseudo-classes</title>
+  <link rel="stylesheet" href="e.css">
+  <link rel="stylesheet" href="https://dev.prismjs.com/themes/prism.css" />
+  <style>
+    /* TODO 1: Make every EVEN list item have a lightgray background. */
+    li:nth-child(even) {
+      background-color: lightgray;
+    }
+    /* TODO 2: Make the 3rd list item have a red text color. */
+    li:nth-child(3) {
+      color: red;
+    }
+    /* TODO 3: Make the FIRST list item bold. */
+    li:first-child {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2 id="title">HTML Code</h2>
+    <div id="description">Copy and paste this code into your HTML file.</div>
+    <pre>
+      <code class="language-html">
+        &lt;!DOCTYPE html&gt;
+        &lt;html lang="en"&gt;
+        
+        &lt;head&gt;
+          &lt;meta charset="UTF-8"&gt;
+          &lt;title&gt;Exercise 5: Pseudo-classes&lt;/title&gt;
+          &lt;style&gt;
+            /* TODO 1: Make every EVEN list item have a lightgray background. */
+        
+            /* TODO 2: Make the 3rd list item have a red text color. */
+        
+            /* TODO 3: Make the FIRST list item bold. */
+          &lt;/style&gt;
+        &lt;/head&gt;
+        
+        &lt;body&gt;
+          &lt;ul&gt;
+            &lt;li&gt;Item 1&lt;/li&gt;
+            &lt;li&gt;Item 2&lt;/li&gt;
+            &lt;li&gt;Item 3&lt;/li&gt;
+            &lt;li&gt;Item 4&lt;/li&gt;
+            &lt;li&gt;Item 5&lt;/li&gt;
+            &lt;li&gt;Item 6&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/body&gt;
+        
+        &lt;/html&gt;
+      </code>
+    </pre>
+    <div>
+      <h2 id="expected-result">Expected Result</h2>
+      <div>
+        <ul>
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+          <li>Item 4</li>
+          <li>Item 5</li>
+          <li>Item 6</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script src="https://dev.prismjs.com/prism.js"></script>
+</body>
+
+</html>

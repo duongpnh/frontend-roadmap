@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 6: Pseudo-elements</title>
+  <link rel="stylesheet" href="e.css">
+  <link rel="stylesheet" href="https://dev.prismjs.com/themes/prism.css" />
+  <style>
+    /* TODO 1: Add the text ">> " before every item with class "arrow". 
+        Make the arrow color blue. */
+    .arrow::before {
+      content: ">> ";
+      color: blue;
+    }
+    /* TODO 2: Add the text " (Read more)" after the link. 
+        Make this text smaller and gray. */
+    .read-link::after {
+      content: " (Read more)";
+      font-size: 12px;
+      color: gray;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2 id="title">HTML Code</h2>
+    <div id="description">Copy and paste this code into your HTML file.</div>
+    <pre>
+      <code class="language-html">
+        &lt;!DOCTYPE html&gt;
+        &lt;html lang="en"&gt;
+        
+        &lt;head&gt;
+          &lt;meta charset="UTF-8"&gt;
+          &lt;title&gt;Exercise 6: Pseudo-elements&lt;/title&gt;
+          &lt;style&gt;
+            /* TODO 1: Add the text ">> " before every item with class "arrow". 
+                   Make the arrow color blue. */
+        
+            /* TODO 2: Add the text " (Read more)" after the link. 
+                   Make this text smaller and gray. */
+          &lt;/style&gt;
+        &lt;/head&gt;
+        
+        &lt;body&gt;
+          &lt;p class="arrow"&gt;Important point&lt;/p&gt;
+          &lt;p&gt;Normal point&lt;/p&gt;
+          &lt;p class="arrow"&gt;Another important point&lt;/p&gt;
+        
+          &lt;a href="#" class="read-link"&gt;Go to article&lt;/a&gt;
+        &lt;/body&gt;
+        
+        &lt;/html&gt;
+      </code>
+    </pre>
+    <div>
+      <h2 id="expected-result">Expected Result</h2>
+      <div>
+        <p class="arrow">Important point</p>
+        <p>Normal point</p>
+        <p class="arrow">Another important point</p>
+        
+        <a href="#" class="read-link">Go to article</a>
+      </div>
+    </div>
+  </div>
+  <script src="https://dev.prismjs.com/prism.js"></script>
+</body>
+
+</html>

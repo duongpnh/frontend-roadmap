@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 9: !important</title>
+  <link rel="stylesheet" href="e.css">
+  <link rel="stylesheet" href="https://dev.prismjs.com/themes/prism.css" />
+  <style>
+    /* The generic tag selector */
+    /* TODO: The paragraph below has an inline style setting it to red.
+        Write a CSS rule to force it to be BLUE. */
+    
+    .force-change {
+        color: blue !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2 id="title">HTML Code</h2>
+    <div id="description">Copy and paste this code into your HTML file.</div>
+    <pre>
+      <code class="language-html">
+        &lt;!DOCTYPE html&gt;
+        &lt;html lang="en"&gt;
+        
+        &lt;head&gt;
+          &lt;meta charset="UTF-8"&gt;
+          &lt;title&gt;Exercise 9: !important&lt;/title&gt;
+          &lt;style&gt;
+            /* TODO: The paragraph below has an inline style setting it to red.
+                   Write a CSS rule to force it to be BLUE. */
+        
+            .force-change {
+              /* Your code here */
+            }
+          &lt;/style&gt;
+        &lt;/head&gt;
+        
+        &lt;body&gt;
+          &lt;p class="force-change" style="color: red;"&gt;I am stubbornly red.&lt;/p&gt;
+        &lt;/body&gt;
+        
+        &lt;/html&gt;
+      </code>
+    </pre>
+    <div>
+      <h2 id="expected-result">Expected Result</h2>
+      <div>
+        <p class="force-change" style="color: red;">I am stubbornly red.</p>
+      </div>
+    </div>
+  </div>
+  <script src="https://dev.prismjs.com/prism.js"></script>
+</body>
+
+</html>

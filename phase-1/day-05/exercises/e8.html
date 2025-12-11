@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 8: Specificity</title>
+  <link rel="stylesheet" href="e.css">
+  <link rel="stylesheet" href="https://dev.prismjs.com/themes/prism.css" />
+  <style>
+    /* The generic tag selector */
+    div#special {
+        background-color: lightblue;
+        padding: 20px;
+    }
+
+    /* The class selector */
+    .box {
+        background-color: orange;
+    }
+
+    /* The ID selector */
+    #special {
+        background-color: purple;
+    }
+
+    /* TODO: Without changing the HTML, write a new CSS rule here 
+        that turns the background GREEN. 
+        Hint: You must beat the specificity of the ID (#special).
+        You might need to chain selectors like: #special.box */
+    #special.box {
+      background-color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2 id="title">HTML Code</h2>
+    <div id="description">Copy and paste this code into your HTML file.</div>
+    <pre>
+      <code class="language-html">
+        &lt;!DOCTYPE html&gt;
+        &lt;html lang="en"&gt;
+        
+        &lt;head&gt;
+          &lt;meta charset="UTF-8"&gt;
+          &lt;title&gt;Exercise 8: Specificity&lt;/title&gt;
+          &lt;style&gt;
+            /* The generic tag selector */
+            div {
+              background-color: lightblue;
+              padding: 20px;
+            }
+        
+            /* The class selector */
+            .box {
+              background-color: orange;
+            }
+        
+            /* The ID selector */
+            #special {
+              background-color: purple;
+            }
+        
+            /* TODO: Without changing the HTML, write a new CSS rule here 
+                   that turns the background GREEN. 
+                   Hint: You must beat the specificity of the ID (#special).
+                   You might need to chain selectors like: #special.box */
+          &lt;/style&gt;
+        &lt;/head&gt;
+        
+        &lt;body&gt;
+          &lt;div id="special" class="box"&gt;
+            Who controls my background color?
+          &lt;/div&gt;
+        &lt;/body&gt;
+        
+        &lt;/html&gt;
+      </code>
+    </pre>
+    <div>
+      <h2 id="expected-result">Expected Result</h2>
+      <div>
+        <div id="special" class="box">
+          Who controls my background color?
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://dev.prismjs.com/prism.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 2: Family Relations (Descendant vs. Child)</title>
+  <link rel="stylesheet" href="e.css">
+  <link rel="stylesheet" href="https://dev.prismjs.com/themes/prism.css" />
+  <style>
+    /* TODO 1: Select only the <span> that is a DIRECT child of the container. 
+        Make it bold and red. */
+    .container > span {
+      font-weight: bold;
+      color: red;
+    }
+    
+    /* TODO 2: Select ALL <span> tags inside the container (grandchildren included). 
+        Give them a blue border. */
+    .container span {
+      border: 1px solid blue;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <h2 id="title">HTML Code</h2>
+    <div id="description">Copy and paste this code into your HTML file.</div>
+    <pre>
+      <code class="language-html">
+        &lt;!DOCTYPE html&gt;
+        &lt;html lang="en"&gt;
+        
+        &lt;head&gt;
+          &lt;meta charset="UTF-8"&gt;
+          &lt;title&gt;Exercise 2: Combinators&lt;/title&gt;
+          &lt;style&gt;
+            /* TODO 1: Select only the &lt;span&gt; that is a DIRECT child of the container. 
+                   Make it bold and red. */
+        
+            /* TODO 2: Select ALL &lt;span&gt; tags inside the container (grandchildren included). 
+                   Give them a blue border. */
+          &lt;/style&gt;
+        &lt;/head&gt;
+        
+        &lt;body&gt;
+          &lt;div class="container"&gt;
+            &lt;span&gt;I am a direct child.&lt;/span&gt;
+        
+            &lt;div class="inner-box"&gt;
+              &lt;span&gt;I am a grandchild (nested deeper).&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/body&gt;
+        
+        &lt;/html&gt;
+      </code>
+    </pre>
+    <div>
+      <h2 id="expected-result">Expected Result</h2>
+      <div>
+        <div class="container">
+          <span>I am a direct child.</span>
+    
+          <div class="inner-box">
+            <span>I am a grandchild (nested deeper).</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://dev.prismjs.com/prism.js"></script>
+</body>
+
+</html>

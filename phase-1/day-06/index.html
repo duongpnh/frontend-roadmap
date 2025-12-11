@@ -4,58 +4,43 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Day 6 — Box Model & Layout Foundations</title>
-	<link rel="stylesheet" href="./styles.css">
+	<link rel="stylesheet" href="../../styles.css">
 </head>
 <body>
-	<header class="page-header u-pad">
-		<h1>Cards & Two-Column Layout</h1>
-		<p>Box model, spacing, and classic layout techniques.</p>
-	</header>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title">Day 6 — Box Model & Layout Foundations</h1>
+      <p class="site-subtitle">Box model, spacing, and classic layout techniques.</p>
+      <nav class="site-nav" aria-label="Sections">
+        <a href="../index.html" class="nav-link">Back to Phase 1</a>
+        <a href="../../index.html" class="nav-link">Home</a>
+      </nav>
+    </div>
+  </header>
 
-	<main class="u-pad">
-		<section aria-labelledby="cards">
-			<h2 id="cards">Card component</h2>
-			<div class="card-grid">
-				<article class="card">
-					<img class="card-media" src="https://picsum.photos/400/220?1" alt="Abstract image 1">
-					<div class="card-body">
-						<h3 class="card-title">Card One</h3>
-						<p>Demonstrates padding, borders, and rounded corners.</p>
-						<a class="card-button" href="#">Details</a>
-					</div>
-				</article>
-				<article class="card">
-					<img class="card-media" src="https://picsum.photos/404/220?2" alt="Abstract image 2">
-					<div class="card-body">
-						<h3 class="card-title">Card Two</h3>
-						<p>Uses `box-sizing: border-box` to keep widths predictable.</p>
-						<a class="card-button" href="#">Details</a>
-					</div>
-				</article>
-				<article class="card">
-					<img class="card-media" src="https://picsum.photos/402/220?3" alt="Abstract image 3">
-					<div class="card-body">
-						<h3 class="card-title">Card Three</h3>
-						<p>Shows margin vs padding and simple shadows.</p>
-						<a class="card-button" href="#">Details</a>
-					</div>
-				</article>
-			</div>
-		</section>
-
-		<section aria-labelledby="twocol" class="u-mt">
-			<h2 id="twocol">Two-column (inline-block)</h2>
-			<div class="two-col">
-				<div class="col">
-					<h3>Column A</h3>
-					<p>Inline-block avoids float clearing, but introduces whitespace quirks.</p>
-				</div><div class="col">
-					<h3>Column B</h3>
-					<p>Modern CSS prefers Flexbox/Grid, but this illustrates history.</p>
-				</div>
-			</div>
-		</section>
+	<main class="container">
+    <section id="concepts">
+      <div id="exercises" class="section">
+        <div class="grid">
+          <a class="card" href="./exercises/e1.html">
+            <h3>Exercise 1 — Box Model & Layout Foundations</h3>
+            <p>Box model, spacing, and classic layout techniques.</p>
+          </a>
+          <a class="card" href="./exercises/paralllax-scrolling-effect.html">
+            <h3>Parallax Scrolling Effect</h3>
+            <p>Create a parallax scrolling effect using CSS.</p>
+          </a>
+        </div>
+      </div>
+    </section>
 	</main>
+  <footer role="contentinfo" class="site-footer">
+    <div class="container">
+      <p><strong>Remember:</strong> SEO is an ongoing process, not a one-time task.</p>
+      <p>Keep learning, testing, and improving your HTML structure for better search rankings.</p>
+      <p style="margin-top: 20px; opacity: 0.7;">© 2024 SEO HTML Guide | Created for Educational Purposes</p>
+    </div>
+  </footer>
 </body>
 </html>
 

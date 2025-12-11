@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 4: Attributes</title>
+  <link rel="stylesheet" href="e.css">
+  <link rel="stylesheet" href="https://dev.prismjs.com/themes/prism.css" />
+  <style>
+    /* TODO 1: Select the input with type="text" and give it a green border. */
+    input[type="text"] {
+      border: 1px solid green;
+    }
+    /* TODO 2: Select the link that ends with ".pdf" and make it red. 
+        (Hint: use the $= selector) */
+    a[href$=".pdf"] {
+      color: red;
+    }
+    /* TODO 3: Select the link that contains "google" anywhere in the href. 
+        Make it bold. (Hint: use the *= selector) */
+    a[href*="google"] {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2 id="title">HTML Code</h2>
+    <div id="description">Copy and paste this code into your HTML file.</div>
+    <pre>
+      <code class="language-html">
+        &lt;!DOCTYPE html&gt;
+        &lt;html lang="en"&gt;
+        
+        &lt;head&gt;
+          &lt;meta charset="UTF-8"&gt;
+          &lt;title&gt;Exercise 4: Attributes&lt;/title&gt;
+          &lt;style&gt;
+            /* TODO 1: Select the input with type="text" and give it a green border. */
+        
+            /* TODO 2: Select the link that ends with ".pdf" and make it red. 
+                   (Hint: use the $= selector) */
+        
+            /* TODO 3: Select the link that contains "google" anywhere in the href. 
+                   Make it bold. (Hint: use the *= selector) */
+          &lt;/style&gt;
+        &lt;/head&gt;
+        
+        &lt;body&gt;
+          &lt;form&gt;
+            &lt;input type="text" placeholder="Name"&gt;
+            &lt;input type="password" placeholder="Password"&gt;
+          &lt;/form&gt;
+        
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href="document.pdf"&gt;Download PDF&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="image.jpg"&gt;View Image&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="https://www.google.com"&gt;Go to Google&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/body&gt;
+        
+        &lt;/html&gt;
+      </code>
+    </pre>
+    <div>
+      <h2 id="expected-result">Expected Result</h2>
+      <div>
+        <form>
+          <input type="text" placeholder="Name">
+          <input type="password" placeholder="Password">
+        </form>
+        
+        <ul>
+          <li><a href="document.pdf">Download PDF</a></li>
+          <li><a href="image.jpg">View Image</a></li>
+          <li><a href="https://www.google.com">Go to Google</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script src="https://dev.prismjs.com/prism.js"></script>
+</body>
+
+</html>
